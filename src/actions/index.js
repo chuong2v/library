@@ -1,4 +1,5 @@
-import * as types from './types'
+import * as group from './group'
 
-export function login() {
-}
+export const ActionCreators = Object.assign({},
+  group
+)

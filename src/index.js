@@ -4,21 +4,26 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import { Provider } from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
 	createStore, applyMiddleware,
 	compose
 } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {logger} from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import reducer from './reducers'
 
-// const loggerMiddleware = createLogger({})
+const loggerMiddleware = createLogger({
+	diff: true,
+	duration: true
+})
 
 function configureStore(initialState) {
 	const enhancer = compose(
 		applyMiddleware(
 			thunkMiddleware,
-			logger
+			loggerMiddleware
 		)
 	)
 	return createStore(reducer, initialState, enhancer)
@@ -27,7 +32,9 @@ function configureStore(initialState) {
 const store = configureStore({})
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<MuiThemeProvider muiTheme={getMuiTheme()}>
+			<App />
+		</MuiThemeProvider>
 	</Provider>,
 	document.getElementById('root')
 )

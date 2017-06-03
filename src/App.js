@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { fetchGroupsFromApi } from './actions/group'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetch
+  }
   render() {
     return (
       <div className="App">
@@ -17,5 +21,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

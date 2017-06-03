@@ -1,0 +1,1 @@
+export const GROUP_FETCH = 'GROUP_FETCH'
