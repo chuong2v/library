@@ -11,5 +11,4 @@ export function fetchGroupsFromApi() {
   }
 }
 
- console.log("types.GROUP_FETCH ", types.GROUP_FETCH);
 let fetchGroups = createAction(types.GROUP_FETCH, groups => groups)

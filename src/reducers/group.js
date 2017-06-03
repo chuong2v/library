@@ -3,9 +3,9 @@ import { combineReducers } from 'redux'
 import createReducer from '../lib/createReducer'
 
 export const group = combineReducers({
-  list: createReducer({}, {
+  list: createReducer([], {
     [types.GROUP_FETCH](state, action) {
-      return Object.assign({}, state, action.ticket)
+      return action.payload || []
     },
   })
 })

@@ -1,5 +1,5 @@
-import axios from 'axios'
+import api from './config'
 
 export function fetch() {
-  return axios.get('http://localhost:8080/PGELite/sv/groups')
+  return api.get('groups')
 }

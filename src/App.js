@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { fetchGroupsFromApi } from './actions/group'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetch
+    this.props.fetchGroupsFromApi()
   }
   render() {
     return (
@@ -23,5 +25,14 @@ class App extends Component {
 }
 
 
+function mapStateToProps(state) {
+  return {
+    groups: state.group.list
+  }
+}
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchGroupsFromApi }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
