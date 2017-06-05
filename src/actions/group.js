@@ -1,10 +1,11 @@
 import { createAction } from 'redux-actions'
 import types from './types'
-import Api from './../api'
+import api from './../api'
+const { Group } = api
 
 export function fetchGroupsFromApi() {
   return (dispatch, getState) => {
-    return Api.Group.fetch().then(resp => {
+    return Group.fetch().then(resp => {
       console.log("resp ", resp)
       dispatch(fetchGroups(resp))
     })

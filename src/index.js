@@ -30,7 +30,7 @@ function configureStore(initialState) {
 }
 
 const store = configureStore({})
- console.log("store ", store.getState());
+console.log("store ", store.getState());
 ReactDOM.render(
 	<Provider store={store}>
 		<MuiThemeProvider muiTheme={getMuiTheme()}>
