@@ -2,18 +2,7 @@ import React from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
 import Group from '../group/Group'
 import Student from '../student/Student'
-
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    flex: 1,
-    overflowY: 'auto',
-  },
-}
+import styles from './styles'
 
 class GroupAndStudent extends React.Component {
   render() {
@@ -21,11 +10,10 @@ class GroupAndStudent extends React.Component {
       <div style={styles.root}>
         <GridList
           cols={2}
-          cellHeight={200}
           padding={1}
           style={styles.gridList}
         >
-          <Student />
+          <Student/>
           <Group />
         </GridList>
       </div>

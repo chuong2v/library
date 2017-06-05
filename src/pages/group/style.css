@@ -1,0 +1,8 @@
+.group {
+  width: 100%;
+  height: 100%;
+}
+.group-container {
+  height: 500px;
+  padding: 20px;
+}

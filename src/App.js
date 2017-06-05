@@ -35,17 +35,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <AppBar
-            title="Title"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-            onLeftIconButtonTouchTap={this.handleMenubar.bind(this)}
-          >
-          </AppBar>
-          <Route exact path="/" component={UserManagement} />
-          <Route path="/about" component={Login} />
-          <Route path="/topics" component={Login} />
-        </div>
+        <Route exact path="/" component={UserManagement} />
       </Router >
     )
   }
