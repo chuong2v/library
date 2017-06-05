@@ -9,8 +9,9 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import Login from './pages/Login'
-import Home from './pages/Home'
+import Login from './pages/login'
+import Home from './pages/home'
+import UserManagement from './pages/userManagement'
 import {
   AppBar,
   MenuItem,
@@ -41,22 +42,7 @@ class App extends Component {
             onLeftIconButtonTouchTap={this.handleMenubar.bind(this)}
           >
           </AppBar>
-          {/*<RaisedButton
-            label="Toggle Drawer"
-            onTouchTap={this.handleMenubar.bind(this)}
-          />*/}
-          <Drawer open={this.state.open}>
-            <MenuItem>Menu Item</MenuItem>
-            <MenuItem>Menu Item 2</MenuItem>
-          </Drawer>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/topics">Topics</Link></li>
-          </ul>
-          <hr />
-
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={UserManagement} />
           <Route path="/about" component={Login} />
           <Route path="/topics" component={Login} />
         </div>

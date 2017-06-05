@@ -4,8 +4,8 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import { Provider } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import {
 	createStore, applyMiddleware,
 	compose
@@ -13,6 +13,8 @@ import {
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import reducer from './reducers'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
 
 const loggerMiddleware = createLogger({
 	diff: true,
@@ -30,7 +32,7 @@ function configureStore(initialState) {
 }
 
 const store = configureStore({})
-console.log("store ", store.getState());
+console.log("store ", store.getState())
 ReactDOM.render(
 	<Provider store={store}>
 		<MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -40,4 +42,4 @@ ReactDOM.render(
 	document.getElementById('root')
 )
 
-registerServiceWorker();
+registerServiceWorker()
