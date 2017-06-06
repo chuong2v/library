@@ -12,7 +12,9 @@ import {
 } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import reducer from './reducers'
+import reducers from './reducers'
+import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n'
+import translationsObject from './locale'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
@@ -28,16 +30,25 @@ function configureStore(initialState) {
 			loggerMiddleware
 		)
 	)
-	return createStore(reducer, initialState, enhancer)
+	return createStore(
+		reducers,
+		initialState,
+		enhancer
+	)
 }
 
 const store = configureStore({})
 console.log("store ", store.getState())
 const muiTheme = getMuiTheme({
 	appBar: {
-    height: 50,
-  },
+		height: 50,
+	},
 })
+
+syncTranslationWithStore(store)
+store.dispatch(loadTranslations(translationsObject));
+store.dispatch(setLocale('sp'));
+
 ReactDOM.render(
 	<Provider store={store}>
 		<MuiThemeProvider muiTheme={muiTheme}>
@@ -46,5 +57,4 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 )
-
 registerServiceWorker()

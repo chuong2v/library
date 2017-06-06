@@ -13,8 +13,8 @@ class GroupAndStudent extends React.Component {
           padding={1}
           style={styles.gridList}
         >
-          <Student/>
           <Group />
+          <Student/>
         </GridList>
       </div>
     )
