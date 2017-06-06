@@ -2,7 +2,7 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
-import {Translate, Localize} from 'react-redux-i18n'
+import { Translate } from 'react-redux-i18n'
 
 class Group extends React.Component {
   render() {

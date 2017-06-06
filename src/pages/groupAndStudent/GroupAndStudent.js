@@ -1,5 +1,5 @@
 import React from 'react'
-import { GridList, GridTile } from 'material-ui/GridList'
+import { GridList } from 'material-ui/GridList'
 import Group from '../group/Group'
 import Student from '../student/Student'
 import styles from './styles'
