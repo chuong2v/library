@@ -47,7 +47,7 @@ const muiTheme = getMuiTheme({
 
 syncTranslationWithStore(store)
 store.dispatch(loadTranslations(translationsObject));
-store.dispatch(setLocale('sp'));
+store.dispatch(setLocale('es'));
 
 ReactDOM.render(
 	<Provider store={store}>
