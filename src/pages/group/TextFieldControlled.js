@@ -5,7 +5,8 @@ export default class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {text : props.value, errorText: ''};
+    let isEmptyField = props.value.length === 0; 
+    this.state = {text : props.value, errorText: '', newField: isEmptyField}; 
   }
 
   handleEnter(e) {
@@ -35,7 +36,7 @@ export default class TextFieldControlled extends Component {
 
 
   render() {
-    if(this.props.editing || this.state.newGroup){
+    if(this.props.editing || this.state.newField){
       return (
         <div>
           <TextField ref="textField"

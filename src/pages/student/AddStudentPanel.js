@@ -9,6 +9,7 @@ export default class AddStudentPanel extends Component{
 
     handleOnTapSave(event){
         if(this.state.text.trim().length > 0){
+            this.setState({errorText: ''})
             this.props.onAddNew(this.state.text.trim());
         }else{
             this.setState({errorText: 'This field is required'})
@@ -20,14 +21,6 @@ export default class AddStudentPanel extends Component{
         this.props.onCancel();
     }
 
-    handleBlur(e) {
-        const text = e.target.value.trim();
-        if(text === ''){
-            this.setState({errorText: 'This field is required'})
-        }else{
-            this.setState({errorText: ''})
-        }
-    }
     handleChange(e) {
         this.setState({ text: e.target.value });
     }
@@ -39,12 +32,12 @@ export default class AddStudentPanel extends Component{
                     <div>Introduce students / os</div>
                     <div>Enter the names of the students and pupils, each on a different line.</div>
                     <TextField
+                    autoFocus={true}
                     hintText="Alan Turing"
                     multiLine={true}
                     rows={1}
                     rowsMax={5}
                     errorText = {this.state.errorText}
-                    onBlur={this.handleBlur.bind(this)}
                     onChange={this.handleChange.bind(this)}/>
                     <div>
                         <FlatButton label="Save" primary={true} onTouchTap={(event)=>this.handleOnTapSave(event)}/>
