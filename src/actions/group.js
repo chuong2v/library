@@ -37,13 +37,13 @@ const STUDENTS = [
       "del": 0
     },
     {
-       "idGroup": 2,
+       "idGroup": 3,
       "idStudent": 2,
       "name":"Ben",
       "del": 0
     },
     {
-      "idGroup": 2,
+      "idGroup": 4,
       "idStudent": 3,
       "name":"Hama",
       "del": 0
@@ -60,4 +60,8 @@ export function seeStudents(idGroup){
 
 export function deleteStudent(idGroup, idStudent){
   return {type: types.DELETE_STUDENT, idStudent : idStudent};
+}
+
+export function editStudent(idGroup, idStudent, studentName){
+  return {type: types.EDIT_STUDENT, idStudent: idStudent, idGroup: idGroup, studentName: studentName};
 }

@@ -5,8 +5,7 @@ export default class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    let isNewGroup = props.value.length === 0;
-    this.state = {text : props.value, errorText: '', newGroup: isNewGroup};
+    this.state = {text : props.value, errorText: ''};
   }
 
   handleEnter(e) {
@@ -16,10 +15,7 @@ export default class TextFieldControlled extends Component {
         this.setState({errorText: 'This field is required'})
       }else{
         this.props.onSave(text);
-      }
-      
-      if (this.props.newTodo) {
-        this.setState({ text: '' });
+        this.refs.textField.blur();
       }
     }
   }
@@ -37,19 +33,12 @@ export default class TextFieldControlled extends Component {
     }
   }
 
-  getHintText(){
-    if(this.state.newGroup){
-      return "Enter new group name";
-    }else{
-      return "";
-    }
-  }
 
   render() {
     if(this.props.editing || this.state.newGroup){
       return (
         <div>
-          <TextField
+          <TextField ref="textField"
             onKeyDown={this.handleEnter.bind(this)}
             autoFocus={true}
             id="text-field-controlled"
@@ -61,7 +50,6 @@ export default class TextFieldControlled extends Component {
         </div>
       );
     }
-
     return <div>{this.props.value}</div>;
 
   }

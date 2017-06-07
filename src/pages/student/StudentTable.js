@@ -17,6 +17,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectFieldControlled from './SelectFieldControlled';
+import StudentActionCell from './StudentActionCell';
 
 
 
@@ -24,7 +25,8 @@ class StudentTable extends React.Component {
   
   constructor(props, context){
     super(props, context);
-    this.state = {selected:[-1],editing:null,openDeleteModal:false};
+    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].idGroup:null;
+    this.state = {selected:[-1],editing:null,openDeleteModal:false,editingStudentName:null, editingGroupId: null, selectedGroupId: selectedGroupId};
   }
 
  
@@ -66,13 +68,13 @@ class StudentTable extends React.Component {
     });
   }
 
-  handleOnTouchTapEdit(event, selectedRowId){
+  handleOnTouchTapEdit(selectedRowId){
     this.handleRowSelection([selectedRowId]);
     this.setState({
       editing:selectedRowId
     });
   }
-  handleOnTouchTapDelete(event, selectedRowId){
+  handleOnTouchTapDelete(selectedRowId){
     this.setState({
       openDeleteModal:true,
       deleting:selectedRowId
@@ -80,10 +82,30 @@ class StudentTable extends React.Component {
   }
 
   handleOnSaveStudentName(idStudent, text){
-    // this.props.editStudentName(idStudent, text);
-    // this.setState({ editing: null });
+    //at the moment, we don't allow to edit many rows at the same time, so no need to keep idStudent into state.
+    this.setState({editingStudentName: text});
   }
 
+  handOnChangeGroupOfStudent(idStudent, event, key, payload ){
+    //at the moment, we don't allow to edit many rows at the same time, so no need to keep idStudent into state.
+    this.setState({editingGroupId: payload});
+  }
+
+  handleOnSave(idStudent){
+    let studentName, idGroup;
+    let editingGroupId = this.state.editingGroupId;
+    if(!this.state.editingGroupId){
+      editingGroupId = this.state.selectedGroupId;
+    }
+    if(this.state.editingStudentName === null || this.state.editingStudentName === undefined || this.state.editingStudentName.trim().length ===0 ){
+      return;
+    }
+    this.props.editStudent(editingGroupId, idStudent, this.state.editingStudentName);
+  }
+
+  handleOnCancel(idStudent){
+    this.setState({ editing: null, editingStudentName:null, editingGroupId: null });
+  }
 
   render() {
     const DELETE_ACTIONS = [
@@ -113,13 +135,10 @@ class StudentTable extends React.Component {
                   <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
                     <TableRowColumn>
                       <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.idStudent, text)}/>
-                      <SelectFieldControlled groups={groups} editing={this.isRowEditing(index)}/>
+                      <SelectFieldControlled groups={groups} idGroup={row.idGroup} editing={this.isRowEditing(index)} onChange={(event,key, payload) => this.handOnChangeGroupOfStudent(row.idStudent, event,key, payload)}/>
                     </TableRowColumn>
                     <TableRowColumn style={{overflow: 'visible'}}>
-                      <IconButton onTouchTap={(event)=> this.handleOnTouchTapEdit(event,index)} iconClassName="material-icons" tooltip="Edit" tooltipPosition={this.isLastRow(index)? 'top-center': 'bottom-center' }>mode_edit</IconButton>
-                      <IconButton onTouchTap={(event)=> this.handleOnTouchTapDelete(event,index)} iconClassName="material-icons" tooltip="Delete" tooltipPosition={this.isLastRow(index)? 'top-center': 'bottom-center' }>delete</IconButton>
-                      {/*<FlatButton label="Save" primary={true} />
-                      <FlatButton label="Cancel" secondary={true} />*/}
+                      <StudentActionCell onEdit={()=>this.handleOnTouchTapEdit(index)} onDelete={()=>this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={()=>this.handleOnSave(row.idStudent)} onCancel={()=>this.handleOnCancel(row.idStudent)}/>
                     </TableRowColumn>
                   </TableRow>
                   ))}

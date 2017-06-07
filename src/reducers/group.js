@@ -63,6 +63,15 @@ export default function group(state = initialState, action) {
       student.idStudent !== action.idStudent
       );
       return Object.assign({}, state, { students: newStudentsAfterDeleted });
+
+  case types.EDIT_STUDENT:
+      let newStudentsAfterEdited = state.students.map(student=>
+        student.idStudent === action.idStudent ?
+        Object.assign({}, student, { name: action.studentName, idGroup: action.idGroup }) :
+        student
+      );
+      return Object.assign({}, state, { students: newStudentsAfterEdited });
+
   default:
     return state;
   }

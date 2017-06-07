@@ -6,11 +6,12 @@ export default class SelectFieldControlled extends Component{
 
 constructor(props) {
     super(props);
-    this.state = {value: null};
+    this.state = {value: this.props.idGroup};
   }
 
 handleChange(event, index, value){
-    this.setState({value})
+    this.setState({value});
+    this.props.onChange(event, index, value);
 }
 render() {
      const {groups} = this.props;
@@ -24,7 +25,7 @@ render() {
           value={this.state.value}
           onChange={this.handleChange.bind(this)}>
                     {groups.map( (group, index) => (
-                         <MenuItem key={index} value={index} primaryText={group.groupName}/>
+                         <MenuItem key={index} value={group.idGroup} primaryText={group.groupName}/>
                   ))}
         </SelectField>
         </div>
