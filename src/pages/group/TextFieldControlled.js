@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{Component} from 'react';
 import TextField from 'material-ui/TextField';
 
-export default class TextFieldControlled extends React.Component {
+export default class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);

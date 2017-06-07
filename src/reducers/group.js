@@ -57,7 +57,12 @@ export default function group(state = initialState, action) {
 
   case types.SEE_STUDENT:
       return Object.assign({}, state, { students: action.students });
-
+      // should belong to student reducer. refactor later
+  case types.DELETE_STUDENT:
+      let newStudentsAfterDeleted = state.students.filter(student =>
+      student.idStudent !== action.idStudent
+      );
+      return Object.assign({}, state, { students: newStudentsAfterDeleted });
   default:
     return state;
   }

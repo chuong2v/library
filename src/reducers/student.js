@@ -8,6 +8,12 @@ const initialState = {
 
 export default function student(state = initialState, action) {
   switch (action.type) {
+    // case types.DELETE_STUDENT:
+    //   let newStudentsAfterDeleted = state.students.filter(student =>
+    //   student.idStudent !== action.idStudent
+    //   );
+    //   return Object.assign({}, state, { students: newStudentsAfterDeleted });
+
     default:
       return state;
   }

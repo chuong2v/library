@@ -32,19 +32,19 @@ export function editGroup(idGroup, groupName) {
 const STUDENTS = [
     {
       "idGroup": 2,
-      "idStuden": 1,
+      "idStudent": 1,
       "name":"Jack",
       "del": 0
     },
     {
        "idGroup": 2,
-      "idStuden": 2,
+      "idStudent": 2,
       "name":"Ben",
       "del": 0
     },
     {
       "idGroup": 2,
-      "idStuden": 3,
+      "idStudent": 3,
       "name":"Hama",
       "del": 0
     }
@@ -55,4 +55,9 @@ export function seeStudents(idGroup){
     students = [];//assume the idGroup is undefine (belongs to the empty group)
   }
   return {type: types.SEE_STUDENT, students : students};
+}
+
+
+export function deleteStudent(idGroup, idStudent){
+  return {type: types.DELETE_STUDENT, idStudent : idStudent};
 }

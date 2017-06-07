@@ -22,7 +22,7 @@ class Student extends React.Component {
   }
 
   render() {
-    const { students, actions } = this.props;
+    const {groups, students, actions } = this.props;
     return (
       <div className='student-container'>
         <Paper className='student' style={styles.container} zDepth={1} >
@@ -30,7 +30,7 @@ class Student extends React.Component {
           <FloatingActionButton style={style}>
             <ContentAdd />
           </FloatingActionButton>
-          <StudentTable students={students} {...actions}/>
+          <StudentTable groups={groups} students={students} {...actions}/>
         </Paper>
       </div>
     )

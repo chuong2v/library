@@ -15,7 +15,7 @@ class GroupAndStudent extends React.Component {
           style={styles.gridList}
         >
           <Group groups={groups} actions={actions}/>
-          <Student students = {students} actions={actions}/>
+          <Student groups={groups} students = {students} actions={actions}/>
         </GridList>
       </div>
     )
