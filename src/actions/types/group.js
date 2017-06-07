@@ -1,1 +1,9 @@
-export const GROUP_FETCH = 'GROUP_FETCH'
+export const GROUP_FETCH = 'GROUP_FETCH';
+export const GROUP_FETCHCHING = 'GROUP_FETCHING';
+export const GROUP_FETCH_SUCCESS = 'GROUP_FETCH_SUCCESS';
+export const GROUP_FETCH_FAILURE = 'GROUP_FETCH_FAILURE';
+export const ADD_NEW_GROUP = 'ADD_NEW_GROUP';
+export const ADD_EMPTY_GROUP = 'ADD_EMPTY_GROUP';
+export const DELETE_GROUP = 'DELETE_GROUP';
+export const EDIT_GROUP = 'EDIT_GROUP';
+export const SEE_STUDENT = 'SEE_STUDENT';

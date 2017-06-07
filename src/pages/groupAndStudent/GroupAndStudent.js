@@ -6,6 +6,7 @@ import styles from './styles'
 
 class GroupAndStudent extends React.Component {
   render() {
+    const { groups, students, actions } = this.props;
     return (
       <div style={styles.root}>
         <GridList
@@ -13,8 +14,8 @@ class GroupAndStudent extends React.Component {
           padding={1}
           style={styles.gridList}
         >
-          <Group />
-          <Student/>
+          <Group groups={groups} actions={actions}/>
+          <Student students = {students} actions={actions}/>
         </GridList>
       </div>
     )
