@@ -3,11 +3,7 @@ import './style.css'
 import styles from './styles'
 import {Translate, Localize} from 'react-redux-i18n'
 import IconButton from 'material-ui/IconButton';
-import TextFieldControlled from '../group/TextFieldControlled';
-import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
 
 export default class StudentActionCell extends Component{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
@@ -11,7 +11,7 @@ const style = {
   marginRight: 20,
 };
 
-class Group extends React.Component {
+class Group extends Component {
   constructor(props, context){
     super(props, context);
   }

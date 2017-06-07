@@ -1,10 +1,10 @@
-import React from 'react'
+import React,{Component} from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
 import Group from '../group/Group'
 import Student from '../student/Student'
 import styles from './styles'
 
-class GroupAndStudent extends React.Component {
+class GroupAndStudent extends Component {
   render() {
     const { groups, students, actions } = this.props;
     return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './style.css'
 import styles from './styles'
 import {Translate, Localize} from 'react-redux-i18n'
@@ -18,7 +18,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
-class GroupTable extends React.Component {
+class GroupTable extends Component {
   
   constructor(props, context){
     super(props, context);
