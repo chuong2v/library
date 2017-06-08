@@ -1,0 +1,21 @@
+{
+  "groups": [
+    {
+      "groupName": "new Group",
+      "id": 1
+    },
+    {
+      "groupName": "1 cai nua",
+      "id": 5
+    },
+    {
+      "groupName": "them nua nao 1",
+      "id": 6
+    },
+    {
+      "groupName": "fsdafd",
+      "id": 8
+    }
+  ],
+  "students": []
+}

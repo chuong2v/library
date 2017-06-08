@@ -16,14 +16,11 @@ import FlatButton from 'material-ui/FlatButton';
 import SelectFieldControlled from './SelectFieldControlled';
 import StudentActionCell from './StudentActionCell';
 
-
-
-
 class StudentTable extends Component {
   
   constructor(props, context){
     super(props, context);
-    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].idGroup:null;
+    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id:null;
     this.state = {selected:[-1],editing:null,openDeleteModal:false,editingStudentName:null, editingGroupId: null, selectedGroupId: selectedGroupId};
   }
 
@@ -60,7 +57,7 @@ class StudentTable extends Component {
     let deletedStudent = this.props.students.filter((student,index,arr)=>
       index === this.state.deleting
     );
-    this.props.deleteStudent(deletedStudent[0].idGroup, deletedStudent[0].idStudent);
+    this.props.deleteStudent(deletedStudent[0].id, deletedStudent[0].id);
     this.setState({
       openDeleteModal:false
     });
@@ -132,11 +129,11 @@ class StudentTable extends Component {
             {students.map( (row, index) => (
                   <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
                     <TableRowColumn>
-                      <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.idStudent, text)}/>
-                      <SelectFieldControlled groups={groups} idGroup={row.idGroup} editing={this.isRowEditing(index)} onChange={(event,key, payload) => this.handOnChangeGroupOfStudent(row.idStudent, event,key, payload)}/>
+                      <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.id, text)}/>
+                      <SelectFieldControlled groups={groups} idGroup={row.id} editing={this.isRowEditing(index)} onChange={(event,key, payload) => this.handOnChangeGroupOfStudent(row.id, event,key, payload)}/>
                     </TableRowColumn>
                     <TableRowColumn style={{overflow: 'visible'}}>
-                      <StudentActionCell onEdit={()=>this.handleOnTouchTapEdit(index)} onDelete={()=>this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={()=>this.handleOnSave(row.idStudent)} onCancel={()=>this.handleOnCancel(row.idStudent)}/>
+                      <StudentActionCell onEdit={()=>this.handleOnTouchTapEdit(index)} onDelete={()=>this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={()=>this.handleOnSave(row.id)} onCancel={()=>this.handleOnCancel(row.id)}/>
                     </TableRowColumn>
                   </TableRow>
                   ))}

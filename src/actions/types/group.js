@@ -7,3 +7,4 @@ export const ADD_EMPTY_GROUP = 'ADD_EMPTY_GROUP';
 export const DELETE_GROUP = 'DELETE_GROUP';
 export const EDIT_GROUP = 'EDIT_GROUP';
 export const SEE_STUDENT = 'SEE_STUDENT';
+export const SET_STATE_ADD_NEW_GROUP = 'SET_STATE_ADD_NEW_GROUP';

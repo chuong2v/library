@@ -1,13 +1,13 @@
 import { createAction } from 'redux-actions'
 import types from './types'
+import * as StudentActions from './student'
 import api from './../api'
 const { Group } = api
 
 export function fetchGroupsFromApi() {
   return (dispatch, getState) => {
     return Group.fetch().then(resp => {
-      console.log("resp ", resp)
-      dispatch(fetchGroups(resp))
+      dispatch(fetchGroups(resp && resp.data || []))
     })
   }
 }
@@ -15,53 +15,42 @@ export function fetchGroupsFromApi() {
 let fetchGroups = createAction(types.GROUP_FETCH, groups => groups)
 
 export function addNewGroup(groupName) {
-  return { type: types.ADD_NEW_GROUP, groupName };
-}
-
-export function addEmptyGroup() {
-  return { type: types.ADD_EMPTY_GROUP };
-}
-
-export function deleteGroup(idGroup) {
-  return { type: types.DELETE_GROUP, idGroup };
-}
-
-export function editGroup(idGroup, groupName) {
-  return { type: types.EDIT_GROUP, idGroup, groupName };
-}
-const STUDENTS = [
-    {
-      "idGroup": 2,
-      "idStudent": 1,
-      "name":"Jack",
-      "del": 0
-    },
-    {
-       "idGroup": 3,
-      "idStudent": 2,
-      "name":"Ben",
-      "del": 0
-    },
-    {
-      "idGroup": 4,
-      "idStudent": 3,
-      "name":"Hama",
-      "del": 0
-    }
-  ];
-export function seeStudents(idGroup){
-  let students = STUDENTS;//fetchFromAPI;
-  if(!idGroup){
-    students = [];//assume the idGroup is undefine (belongs to the empty group)
+  return (dispatch, getState) => {
+    return Group.create({ groupName }).then(resp => {
+      dispatch(addNewGroupToList(resp.data))
+      dispatch(setAddNewGroup(false))
+    })
   }
-  return {type: types.SEE_STUDENT, students : students};
 }
 
+let addNewGroupToList = createAction(types.ADD_NEW_GROUP, group => group)
 
-export function deleteStudent(idGroup, idStudent){
-  return {type: types.DELETE_STUDENT, idStudent : idStudent};
+export const setAddNewGroup = createAction(types.SET_STATE_ADD_NEW_GROUP, isAddNew => isAddNew)
+
+export function editGroup(id, groupName) {
+  return (dispatch, getState) => {
+    return Group.update(id, { groupName }).then(resp => {
+      dispatch(editGroupInList(resp.data))
+    })
+  }
 }
 
-export function editStudent(idGroup, idStudent, studentName){
-  return {type: types.EDIT_STUDENT, idStudent: idStudent, idGroup: idGroup, studentName: studentName};
+let editGroupInList = createAction(types.EDIT_GROUP, group => group)
+
+export function deleteGroup(id) {
+  return (dispatch, getState) => {
+    return Group.remove(id).then(resp => {
+      dispatch(deleteGroupInList(id))
+    })
+  }
+}
+
+let deleteGroupInList = createAction(types.DELETE_GROUP, id => id)
+
+export function seeStudents(id) {
+  return (dispatch, getState) => {
+    return Group.getGroupStudents(id).then(resp => {
+      dispatch(StudentActions.fetchedStudents(resp.data))
+    })
+  }
 }

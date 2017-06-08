@@ -1,22 +1,22 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-export default class SelectFieldControlled extends Component{
+export default class SelectFieldControlled extends Component {
 
-constructor(props) {
+  constructor(props) {
     super(props);
-    this.state = {value: this.props.idGroup};
+    this.state = { value: this.props.id };
   }
 
-handleChange(event, index, value){
-    this.setState({value});
+  handleChange(event, index, value) {
+    this.setState({ value });
     this.props.onChange(event, index, value);
-}
-render() {
-     const {groups} = this.props;
-    if(!this.props.editing){
-        return null;
+  }
+  render() {
+    const { groups } = this.props;
+    if (!this.props.editing) {
+      return null;
     }
     return (
       <div>
@@ -24,11 +24,12 @@ render() {
           floatingLabelText="Select group"
           value={this.state.value}
           onChange={this.handleChange.bind(this)}>
-                    {groups.map( (group, index) => (
-                         <MenuItem key={index} value={group.idGroup} primaryText={group.groupName}/>
-                  ))}
+          {groups.map((group, index) => (
+            <MenuItem key={index} value={group.id} primaryText={group.groupName} />
+          ))}
         </SelectField>
-        </div>
-        )};
+      </div>
+    )
+  };
 
 }

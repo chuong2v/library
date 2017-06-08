@@ -4,76 +4,44 @@ import types from './../actions/types'
 
 
 const initialState = {
-  groups: [
-    {
-      "idGroup": 2,
-      "groupName": "fuck",
-      "del": 0
-    },
-    {
-      "idGroup": 3,
-      "groupName": "the",
-      "del": 0
-    },
-    {
-      "idGroup": 4,
-      "groupName": "world",
-      "del": 0
-    }
-  ],
-  students:[]
+  list: [],
 };
 
-export default function group(state = initialState, action) {
+export function group(state = initialState, action) {
   switch (action.type) {
-  case types.ADD_NEW_GROUP:
-    let newGroupsIncludeNewGroup =  [{
-      idGroup: state.groups.reduce((maxId, group) => Math.max(group.idGroup, maxId), -1) + 1,
-      groupName: action.groupName,
-      del: 0
-    }, ...state.groups];
-    return Object.assign({}, state, { groups: newGroupsIncludeNewGroup });
+    case types.ADD_NEW_GROUP:
+      let newGroupsIncludeNewGroup = [
+        action.payload, ...state.list
+      ];
+      return Object.assign({}, state, { list: newGroupsIncludeNewGroup });
 
-  case types.ADD_EMPTY_GROUP:
-    let newGroupIncludeEmptyGroup =  [{
-      idGroup: '',
-      groupName: '',
-      del: 0
-    }, ...state.groups];
-    return Object.assign({}, state, { groups: newGroupIncludeEmptyGroup });
-  case types.EDIT_GROUP:
-    let newGroupsAfterEdited = state.groups.map(group =>
-      group.idGroup === action.idGroup ?
-        Object.assign({}, group, { groupName: action.groupName }) :
-        group
-    );
-    return Object.assign({}, state, { groups: newGroupsAfterEdited });
-
-  case types.DELETE_GROUP:
-      let newGroupsAfterDeleted = state.groups.filter(group =>
-      group.idGroup !== action.idGroup
-    );
-      return Object.assign({}, state, { groups: newGroupsAfterDeleted });
-
-  case types.SEE_STUDENT:
-      return Object.assign({}, state, { students: action.students });
-      // should belong to student reducer. refactor later
-  case types.DELETE_STUDENT:
-      let newStudentsAfterDeleted = state.students.filter(student =>
-      student.idStudent !== action.idStudent
+    case types.ADD_EMPTY_GROUP:
+      let newGroupIncludeEmptyGroup = [{
+        id: '',
+        groupName: '',
+        del: 0
+      }, ...state.list];
+      return Object.assign({}, state, { list: newGroupIncludeEmptyGroup });
+    case types.EDIT_GROUP:
+      let newGroupsAfterEdited = state.list.map(group =>
+        group.id === action.payload.id ?
+          Object.assign({}, group, { groupName: action.payload.groupName }) :
+          group
       );
-      return Object.assign({}, state, { students: newStudentsAfterDeleted });
+      return Object.assign({}, state, { list: newGroupsAfterEdited });
 
-  case types.EDIT_STUDENT:
-      let newStudentsAfterEdited = state.students.map(student=>
-        student.idStudent === action.idStudent ?
-        Object.assign({}, student, { name: action.studentName, idGroup: action.idGroup }) :
-        student
+    case types.DELETE_GROUP:
+      let newGroupsAfterDeleted = state.list.filter(group =>
+        group.id !== action.payload
       );
-      return Object.assign({}, state, { students: newStudentsAfterEdited });
+      return Object.assign({}, state, { list: newGroupsAfterDeleted });
 
-  default:
-    return state;
+    case types.GROUP_FETCH:
+      return Object.assign({}, state, { list: action.payload });
+    case types.SET_STATE_ADD_NEW_GROUP:
+      return Object.assign({}, state, { addNew: action.payload });
+    default:
+      return state;
   }
 }
 

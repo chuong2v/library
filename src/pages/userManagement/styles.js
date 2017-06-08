@@ -1,15 +1,16 @@
 export default {
   inkBar: {
-    backgroundColor: "#31087b"
+    // backgroundColor: "#31087b"
   },
   tabs: {
-    backgroundColor: "#f2f2f2",
+    // backgroundColor: "#f2f2f2",
   },
   tab: {
     backgroundColor: "white",
   },
   buttonStyle: {
     fontWeight: 'bold',
-    color: "#000080"
+    color: "#000080",
+    fontSize: 13
   }
 }
