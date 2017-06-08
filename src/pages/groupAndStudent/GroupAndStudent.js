@@ -1,15 +1,19 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
 import Group from '../group/Group'
 import Student from '../student/Student'
 import styles from './styles'
-import * as GroupActions from '../../actions/group';
+import { ActionCreators } from '../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 class GroupAndStudent extends Component {
   componentDidMount() {
-    this.props.actions.fetchGroupsFromApi()
+    this.props.actions.fetchGroupsFromApi().then(()=> {
+      let selectedGroup = this.props.groups[0].id
+      this.props.actions.setSelectedGroup(selectedGroup)
+      this.props.actions.seeStudents(selectedGroup)
+    })
   }
   render() {
     const { groups, students, actions } = this.props;
@@ -20,8 +24,8 @@ class GroupAndStudent extends Component {
           padding={1}
           style={styles.gridList}
         >
-          <Group groups={groups} actions={actions}/>
-          <Student groups={groups} students = {students} actions={actions}/>
+          <Group groups={groups} actions={actions} />
+          <Student groups={groups} students={students} actions={actions} />
         </GridList>
       </div>
     )
@@ -37,7 +41,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(GroupActions, dispatch)
+    actions: bindActionCreators(ActionCreators, dispatch)
   }
 }
 

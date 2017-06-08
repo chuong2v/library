@@ -9,15 +9,22 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import AddStudentPanel from './AddStudentPanel';
 
+import { ActionCreators } from '../../actions';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 class Student extends Component {
   constructor(props, context) {
     super(props, context);
     let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
-    this.state = { addNewStudents: false, selectedGroupId: selectedGroupId };
+    this.state = { 
+      addNewStudents: false, 
+      selectedGroupId: selectedGroupId 
+    };
   }
 
   handleAddNewStudents(event) {
-    this.setState({ addNewStudents: true });
+    this.props.actions.setAddNewStudent(!this.props.addNew);  
   }
 
   handleOnAddNewStudents(studentnames) {
@@ -26,7 +33,7 @@ class Student extends Component {
   }
 
   handleOnCancelAddNew() {
-    this.setState({ addNewStudents: false });
+    this.props.actions.setAddNewStudent(false);
   }
 
   render() {
@@ -39,12 +46,12 @@ class Student extends Component {
             <FloatingActionButton mini
               className='student-add-button'
               onTouchTap={this.handleAddNewStudents.bind(this)}>
-              {this.state.addNewStudents && <ContentClear/> || <ContentAdd />}
+              {this.props.addNew && <ContentClear/> || <ContentAdd />}
             </FloatingActionButton>
           </div>
           <AddStudentPanel onAddNew={(studentNames) => this.handleOnAddNewStudents(studentNames)} 
             onCancel={() => this.handleOnCancelAddNew()} 
-            show={this.state.addNewStudents} />
+            show={this.props.addNew} />
           <StudentTable groups={groups} students={students} {...actions} />
         </Paper>
       </div>
@@ -52,4 +59,18 @@ class Student extends Component {
   }
 }
 
-export default Student
+function mapStateToProps(state) {
+  return {
+    addNew: state.student.addNew,
+    students: state.student.list,
+    selectedGroup: state.group.selected
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(ActionCreators, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Student)

@@ -19,3 +19,7 @@ export function remove(groupId) {
 export function getGroupStudents(groupId) {
   return api.get(`groups/${groupId}/students`)
 }
+
+export function addStudentToGroup(groupId, studentName) {
+  return api.post(`groups/${groupId}/students`, {studentName, groupId})
+}

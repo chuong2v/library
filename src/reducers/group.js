@@ -3,6 +3,8 @@ import types from './../actions/types'
 
 const initialState = {
   list: [],
+  addNew: false,
+  selected: -1
 };
 
 export function group(state = initialState, action) {
@@ -39,6 +41,8 @@ export function group(state = initialState, action) {
       return Object.assign({}, state, { list: action.payload });
     case types.SET_STATE_ADD_NEW_GROUP:
       return Object.assign({}, state, { addNew: action.payload });
+    case types.SET_SELECTED_GROUP:
+      return Object.assign({}, state, { selected: action.payload });
     default:
       return state;
   }

@@ -24,11 +24,15 @@ class GroupTable extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = { selected: [-1], editing: null, openDeleteModal: false };
+    this.state = { 
+      selected: [-1], 
+      editing: null, 
+      penDeleteModal: false 
+    };
   }
 
-  isSelected(index) {
-    return this.state.selected.indexOf(index) > -1;
+  isSelected(row) {
+    return this.props.selectedGroup === row.id;
   }
 
   handleRowSelection(selectedRowIds) {
@@ -36,10 +40,9 @@ class GroupTable extends Component {
       selected: selectedRowIds
     });
     // if the selected row is empty row, set it as editing row and focus to it.
-    let newGroup = this.props.groups[selectedRowIds[0]];
-    if (newGroup && newGroup.groupName === '') {
+    if (selectedRowIds[0] === -1) {
       this.setState({
-        editing: selectedRowIds[0]
+        editing: selectedRowIds
       });
     }
   }
@@ -95,6 +98,11 @@ class GroupTable extends Component {
     }
   }
 
+  setSelectedGroup(group) {
+    this.props.actions.setSelectedGroup(group.id)
+    this.props.actions.seeStudents(group.id)
+  }
+
   renderRow(index = 0, row = { id: -1, groupName: "" }) {
     let rowActions = (
       <TableRowColumn style={{ overflow: 'visible' }}>
@@ -111,7 +119,8 @@ class GroupTable extends Component {
     )
     return (
       <TableRow selectable={!this.isRowEditing(row.id)}
-        selected={this.isSelected(index)} key={index}>
+        selected={this.isSelected.bind(this)(row)} key={index}
+        onTouchTap={this.setSelectedGroup.bind(this, row)}>
         <TableRowColumn>
           <TextFieldControlled value={row.groupName}
             editing={this.isRowEditing(row.id)}
@@ -167,7 +176,8 @@ function mapStateToProps(state) {
   return {
     groups: state.group.list,
     addNew: state.group.addNew,
-    students: state.student.list
+    students: state.student.list,
+    selectedGroup: state.group.selected
   }
 }
 
