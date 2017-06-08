@@ -17,5 +17,26 @@
       "id": 8
     }
   ],
-  "students": []
+  "students": [
+    {
+      "studentName": "trung",
+      "groupId": "1",
+      "id": 1
+    },
+    {
+      "studentName": "chuong",
+      "groupId": "1",
+      "id": 2
+    },
+    {
+      "studentName": "nguyen",
+      "groupId": "5",
+      "id": 3
+    },
+    {
+      "studentName": "dung",
+      "groupId": "5",
+      "id": 4
+    }
+  ]
 }

@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './style.css'
 import styles from './styles'
-import {Translate, Localize} from 'react-redux-i18n'
+import { Translate, Localize } from 'react-redux-i18n'
 import {
   Table,
   TableBody,
@@ -17,89 +17,87 @@ import SelectFieldControlled from './SelectFieldControlled';
 import StudentActionCell from './StudentActionCell';
 
 class StudentTable extends Component {
-  
-  constructor(props, context){
+
+  constructor(props, context) {
     super(props, context);
-    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id:null;
-    this.state = {selected:[-1],editing:null,openDeleteModal:false,editingStudentName:null, editingGroupId: null, selectedGroupId: selectedGroupId};
+    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
+    this.state = { selected: [-1], editing: null, openDeleteModal: false, editingStudentName: null, editingGroupId: null, selectedGroupId: selectedGroupId };
   }
 
- 
-
-  isSelected(index){
-    return this.state.selected.indexOf(index)>-1;
+  isSelected(index) {
+    return this.state.selected.indexOf(index) > -1;
   }
 
-  handleRowSelection(selectedRowId){
+  handleRowSelection(selectedRowId) {
     this.setState({
-      selected:selectedRowId
+      selected: selectedRowId
     });
   }
-  handleCellClick(rowNumber, columnId){
-    console.log("handleCellClick: " + rowNumber + ", "+ columnId);
+  handleCellClick(rowNumber, columnId) {
+    console.log("handleCellClick: " + rowNumber + ", " + columnId);
   }
 
-  isLastRow(index){
-    return this.props.students.length-1 === index;
+  isLastRow(index) {
+    return this.props.students.length - 1 === index;
   }
 
-  handleCloseOnDeleteModal(){
+  handleCloseOnDeleteModal() {
     this.setState({
-      openDeleteModal:false
+      openDeleteModal: false
     });
   }
 
-  isRowEditing(index){
+  isRowEditing(index) {
     return this.state.editing === index;
   }
 
-  handleDeleteOnDeleteModal(){
-    let deletedStudent = this.props.students.filter((student,index,arr)=>
+  handleDeleteOnDeleteModal() {
+    let deletedStudent = this.props.students.filter((student, index, arr) =>
       index === this.state.deleting
     );
     this.props.deleteStudent(deletedStudent[0].id, deletedStudent[0].id);
     this.setState({
-      openDeleteModal:false
+      openDeleteModal: false
     });
   }
 
-  handleOnTouchTapEdit(selectedRowId){
+  handleOnTouchTapEdit(selectedRowId) {
     this.handleRowSelection([selectedRowId]);
     this.setState({
-      editing:selectedRowId
+      editing: selectedRowId
     });
   }
-  handleOnTouchTapDelete(selectedRowId){
+  handleOnTouchTapDelete(selectedRowId) {
     this.setState({
-      openDeleteModal:true,
-      deleting:selectedRowId
+      openDeleteModal: true,
+      deleting: selectedRowId
     });
   }
 
-  handleOnSaveStudentName(idStudent, text){
+  handleOnSaveStudentName(idStudent, text) {
     //at the moment, we don't allow to edit many rows at the same time, so no need to keep idStudent into state.
-    this.setState({editingStudentName: text});
+    this.setState({ editingStudentName: text });
   }
 
-  handOnChangeGroupOfStudent(idStudent, event, key, payload ){
+  handOnChangeGroupOfStudent(idStudent, event, key, payload) {
     //at the moment, we don't allow to edit many rows at the same time, so no need to keep idStudent into state.
-    this.setState({editingGroupId: payload});
+    this.setState({ editingGroupId: payload });
   }
 
-  handleOnSave(idStudent){
+  handleOnSave(idStudent) {
     let studentName, idGroup;
     let editingGroupId = this.state.editingGroupId;
-    if(!this.state.editingGroupId){
+    if (!this.state.editingGroupId) {
       editingGroupId = this.state.selectedGroupId;
     }
-    if(this.state.editingStudentName === null || this.state.editingStudentName === undefined || this.state.editingStudentName.trim().length ===0 ){
+    if (this.state.editingStudentName === null || this.state.editingStudentName === undefined || this.state.editingStudentName.trim().length === 0) {
       return;
     }
     this.props.editStudent(editingGroupId, idStudent, this.state.editingStudentName);
   }
 
-  handleOnCancel(idStudent){
-    this.setState({ editing: null, editingStudentName:null, editingGroupId: null });
+  handleOnCancel(idStudent) {
+    this.setState({ editing: null, editingStudentName: null, editingGroupId: null });
   }
 
   render() {
@@ -126,20 +124,20 @@ class StudentTable extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {students.map( (row, index) => (
-                  <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
-                    <TableRowColumn>
-                      <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.id, text)}/>
-                      <SelectFieldControlled groups={groups} idGroup={row.id} editing={this.isRowEditing(index)} onChange={(event,key, payload) => this.handOnChangeGroupOfStudent(row.id, event,key, payload)}/>
-                    </TableRowColumn>
-                    <TableRowColumn style={{overflow: 'visible'}}>
-                      <StudentActionCell onEdit={()=>this.handleOnTouchTapEdit(index)} onDelete={()=>this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={()=>this.handleOnSave(row.id)} onCancel={()=>this.handleOnCancel(row.id)}/>
-                    </TableRowColumn>
-                  </TableRow>
-                  ))}
+            {students.map((row, index) => (
+              <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
+                <TableRowColumn>
+                  <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
+                  <SelectFieldControlled groups={groups} idGroup={row.id} editing={this.isRowEditing(index)} onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
+                </TableRowColumn>
+                <TableRowColumn style={{ overflow: 'visible' }}>
+                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(index)} onDelete={() => this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={() => this.handleOnSave(row.id)} onCancel={() => this.handleOnCancel(row.id)} />
+                </TableRowColumn>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
-         <Dialog
+        <Dialog
           actions={DELETE_ACTIONS}
           modal={false}
           open={this.state.openDeleteModal}
@@ -147,8 +145,8 @@ class StudentTable extends Component {
         >
           Are you sure to delete this user?
       </Dialog>
-     </div>)
-    }
+      </div>)
+  }
 }
 
 export default StudentTable;
