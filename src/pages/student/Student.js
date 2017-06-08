@@ -1,15 +1,51 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
+import StudentTable from './StudentTable'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentClear from 'material-ui/svg-icons/content/clear';
+import AddStudentPanel from './AddStudentPanel';
 
-class Student extends React.Component {
+class Student extends Component {
+  constructor(props, context) {
+    super(props, context);
+    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
+    this.state = { addNewStudents: false, selectedGroupId: selectedGroupId };
+  }
+
+  handleAddNewStudents(event) {
+    this.setState({ addNewStudents: true });
+  }
+
+  handleOnAddNewStudents(studentnames) {
+    //slip by "\n" to save as a list of students into this.state.selectedGroupId
+    console.log("calling handleOnAddNewStudents: " + studentnames);
+  }
+
+  handleOnCancelAddNew() {
+    this.setState({ addNewStudents: false });
+  }
+
   render() {
+    const { groups, students, actions } = this.props;
     return (
       <div className='student-container'>
         <Paper className='student' style={styles.container} zDepth={1} >
-          <Translate value='student.title' />
+          <div className='student-bar'>
+            <Translate value='student.title' />
+            <FloatingActionButton mini
+              className='student-add-button'
+              onTouchTap={this.handleAddNewStudents.bind(this)}>
+              {this.state.addNewStudents && <ContentClear/> || <ContentAdd />}
+            </FloatingActionButton>
+          </div>
+          <AddStudentPanel onAddNew={(studentNames) => this.handleOnAddNewStudents(studentNames)} 
+            onCancel={() => this.handleOnCancelAddNew()} 
+            show={this.state.addNewStudents} />
+          <StudentTable groups={groups} students={students} {...actions} />
         </Paper>
       </div>
     )

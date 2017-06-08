@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Tabs, Tab } from 'material-ui/Tabs'
 import GroupAndStudent from '../groupAndStudent'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
 
-class UserManagement extends React.Component {
+class UserManagement extends Component {
   render() {
+    const { groups, students, actions } = this.props;
     return (
       <Tabs
         initialSelectedIndex={1}
@@ -21,7 +22,7 @@ class UserManagement extends React.Component {
         <Tab label={<Translate value='menu.2' />}
           buttonStyle={styles.buttonStyle}
         >
-          <GroupAndStudent />
+          <GroupAndStudent groups={groups} students={students} actions={actions}/>
         </Tab>
         <Tab label={<Translate value='menu.3' />}
           buttonStyle={styles.buttonStyle}
