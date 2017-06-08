@@ -10,7 +10,7 @@ export default {
   },
   buttonStyle: {
     fontWeight: 'bold',
-    color: "#000080",
-    fontSize: 13
+    fontSize: 13,
+    color: "#000080"
   }
 }

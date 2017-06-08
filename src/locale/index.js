@@ -1,7 +1,7 @@
 import en from './en'
-import sp from './sp'
+import es from './es'
 
 export default {
   en,
-  sp
+  es
 }

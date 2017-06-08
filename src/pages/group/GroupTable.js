@@ -145,7 +145,7 @@ class GroupTable extends Component {
           <TableHeaderColumn>Actions</TableHeaderColumn>
         </TableRow>
       </TableHeader>
-      <TableBody displayRowCheckbox={false}>
+      <TableBody deselectOnClickaway={false} displayRowCheckbox={false}>
         {this.props.addNew && this.renderRow.bind(this)() || null}
         {groups.map((row, index) => this.renderRow.bind(this)(index, row))}
       </TableBody>

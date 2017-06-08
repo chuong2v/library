@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Tabs, Tab } from 'material-ui/Tabs'
 import GroupAndStudent from '../groupAndStudent'
 import styles from './styles'
-import {Translate, Localize} from 'react-redux-i18n'
+import { Translate } from 'react-redux-i18n'
 
 class UserManagement extends Component {
   render() {
@@ -14,22 +14,22 @@ class UserManagement extends Component {
         contentContainerStyle={styles.tab}
         tabItemContainerStyle={styles.tabs}
       >
-        <Tab label={<Translate value='menu.1'/>}
+        <Tab label={<Translate value='menu.1' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />
         </Tab>
-        <Tab label={<Translate value='menu.2'/>}
+        <Tab label={<Translate value='menu.2' />}
           buttonStyle={styles.buttonStyle}
         >
           <GroupAndStudent groups={groups} students={students} actions={actions}/>
         </Tab>
-        <Tab label={<Translate value='menu.3'/>}
+        <Tab label={<Translate value='menu.3' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />
         </Tab>
-        <Tab label={<Translate value='menu.4'/>}
+        <Tab label={<Translate value='menu.4' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />

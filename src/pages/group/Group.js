@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
-import {Translate, Localize} from 'react-redux-i18n'
+import { Translate } from 'react-redux-i18n'
 import GroupTable from './GroupTable'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Divider from 'material-ui/Divider';

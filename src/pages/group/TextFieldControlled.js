@@ -8,11 +8,11 @@ class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    let isNewGroup = props.value.length === 0;
+    let newEditField = props.value.length === 0; 
     this.state = {
       text: props.value,
       errorText: '',
-      newGroup: isNewGroup
+      newEditField: newEditField
     };
   }
 
@@ -44,7 +44,7 @@ class TextFieldControlled extends Component {
   }
 
   render() {
-    if (this.props.editing || this.state.newGroup) {
+    if (this.props.editing || this.state.newEditField) {
       return (
         <div>
           <TextField ref='textField'
