@@ -1,6 +1,4 @@
 import types from './../actions/types'
-// import { combineReducers } from 'redux'
-// import createReducer from '../lib/createReducer'
 
 
 const initialState = {
@@ -11,7 +9,8 @@ export function group(state = initialState, action) {
   switch (action.type) {
     case types.ADD_NEW_GROUP:
       let newGroupsIncludeNewGroup = [
-        action.payload, ...state.list
+        action.payload,
+        ...state.list
       ];
       return Object.assign({}, state, { list: newGroupsIncludeNewGroup });
 
@@ -44,11 +43,3 @@ export function group(state = initialState, action) {
       return state;
   }
 }
-
-// export const group = combineReducers({
-//   list: createReducer([], {
-//     [types.GROUP_FETCH](state, action) {
-//       return action.payload || []
-//     },
-//   })
-// })
