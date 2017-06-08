@@ -15,6 +15,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import SelectFieldControlled from './SelectFieldControlled';
 import StudentActionCell from './StudentActionCell';
+import * as StudentActions from '../../actions/student'
+
+import * as GroupActions from '../../actions/group';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class StudentTable extends Component {
 
@@ -127,11 +132,18 @@ class StudentTable extends Component {
             {students.map((row, index) => (
               <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
                 <TableRowColumn>
-                  <TextFieldControlled value={row.name} editing={this.isRowEditing(index)} onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
-                  <SelectFieldControlled groups={groups} idGroup={row.id} editing={this.isRowEditing(index)} onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
+                  <TextFieldControlled value={row.studentName} editing={this.isRowEditing(index)}
+                    onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
+                  <SelectFieldControlled groups={groups} idGroup={row.id}
+                    editing={this.isRowEditing(index)}
+                    onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
                 </TableRowColumn>
                 <TableRowColumn style={{ overflow: 'visible' }}>
-                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(index)} onDelete={() => this.handleOnTouchTapDelete(index)} lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)} onSave={() => this.handleOnSave(row.id)} onCancel={() => this.handleOnCancel(row.id)} />
+                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(index)}
+                    onDelete={() => this.handleOnTouchTapDelete(index)}
+                    lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)}
+                    onSave={() => this.handleOnSave(row.id)}
+                    onCancel={() => this.handleOnCancel(row.id)} />
                 </TableRowColumn>
               </TableRow>
             ))}
@@ -149,4 +161,17 @@ class StudentTable extends Component {
   }
 }
 
-export default StudentTable;
+function mapStateToProps(state) {
+  return {
+    addNew: state.student.addNew,
+    students: state.student.list
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(StudentActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentTable)

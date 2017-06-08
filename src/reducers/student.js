@@ -31,6 +31,9 @@ export function student(state = initialState, action) {
     case types.STUDENT_FETCH:
       return Object.assign({}, state, { list: action.payload });
 
+    case types.ADD_STUDENT_TO_GROUP:
+      return Object.assign({}, state, { list: [...(state.list), action.payload] });
+
     default:
       return state;
   }
