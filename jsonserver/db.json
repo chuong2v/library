@@ -20,9 +20,9 @@
       "studentName": "chuong"
     },
     {
-      "id": 2,
-      "groupId": 1,
-      "studentName": "trung"
+      "groupId": 2,
+      "studentName": "chuong",
+      "id": 2
     },
     {
       "id": 3,
@@ -30,9 +30,13 @@
       "studentName": "nguyen"
     },
     {
-      "studentName": "fasdfds",
-      "groupId": "[object Object]",
-      "id": 4
+      "id": 5
+    },
+    {
+      "id": 8
+    },
+    {
+      "id": 9
     }
   ]
 }

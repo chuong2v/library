@@ -9,12 +9,19 @@ import { bindActionCreators } from 'redux'
 class AddStudentPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = { text: '', errorText: '' };
+        this.state = { 
+            text: '', 
+            errorText: '',
+            addNew: true 
+        };
     }
 
     handleOnTapSave(event) {
         if (this.state.text.trim().length > 0) {
-            this.props.actions.addStudentToGroup(this.props.selectedGroup, this.state.text.trim());
+            this.props.actions.addStudentToGroup(this.props.selectedGroup, this.state.text.trim())
+            .then(()=> {
+                this.props.actions.setAddNewStudent(false)
+            });
         } else {
             this.setState({ errorText: 'This field is required' })
         }
@@ -38,7 +45,7 @@ class AddStudentPanel extends Component {
     }
 
     render() {
-        if (this.props.show) {
+        if (this.props.addNew) {
             return (
                 <div>
                     <div>Introduce students / os</div>
@@ -65,15 +72,16 @@ class AddStudentPanel extends Component {
 
 
 function mapStateToProps(state) {
-  return {
-    selectedGroup: state.group.selected
-  }
+    return {
+        selectedGroup: state.group.selected,
+        addNew: state.student.addNew
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(ActionCreators, dispatch)
-  }
+    return {
+        actions: bindActionCreators(ActionCreators, dispatch)
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddStudentPanel)

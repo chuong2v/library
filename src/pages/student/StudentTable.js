@@ -57,10 +57,7 @@ class StudentTable extends Component {
   }
 
   handleDeleteOnDeleteModal() {
-    let deletedStudent = this.props.students.filter((student, index, arr) =>
-      index === this.state.deleting
-    );
-    this.props.deleteStudent(deletedStudent[0].id, deletedStudent[0].id);
+    this.props.actions.deleteStudent(this.state.deleting);
     this.setState({
       openDeleteModal: false
     });
@@ -98,7 +95,11 @@ class StudentTable extends Component {
     if (this.state.editingStudentName === null || this.state.editingStudentName === undefined || this.state.editingStudentName.trim().length === 0) {
       return;
     }
-    this.props.editStudent(editingGroupId, idStudent, this.state.editingStudentName);
+    let student = {
+      groupId: editingGroupId,
+      studentName: this.state.editingStudentName
+    }
+    this.props.actions.editStudent(idStudent, student);
   }
 
   handleOnCancel(idStudent) {
@@ -130,18 +131,20 @@ class StudentTable extends Component {
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {students.map((row, index) => (
-              <TableRow selectable={!this.isRowEditing(index)} selected={this.isSelected(index)} key={index}>
+              <TableRow selectable={!this.isRowEditing(row.id)}
+                selected={this.isSelected(index)} key={index}>
                 <TableRowColumn>
-                  <TextFieldControlled value={row.studentName} editing={this.isRowEditing(index)}
+                  <TextFieldControlled value={row.studentName} editing={this.isRowEditing(row.id)}
                     onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
                   <SelectFieldControlled groups={groups} idGroup={row.id}
-                    editing={this.isRowEditing(index)}
+                    editing={this.isRowEditing(row.id)}
                     onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
                 </TableRowColumn>
                 <TableRowColumn style={{ overflow: 'visible' }}>
-                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(index)}
-                    onDelete={() => this.handleOnTouchTapDelete(index)}
-                    lastRow={this.isLastRow(index)} editing={this.isRowEditing(index)}
+                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(row.id)}
+                    onDelete={() => this.handleOnTouchTapDelete(row.id)}
+                    lastRow={this.isLastRow(index)} 
+                    editing={this.isRowEditing(row.id)}
                     onSave={() => this.handleOnSave(row.id)}
                     onCancel={() => this.handleOnCancel(row.id)} />
                 </TableRowColumn>

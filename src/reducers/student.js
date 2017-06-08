@@ -16,7 +16,7 @@ export function student(state = initialState, action) {
     // should belong to student reducer. refactor later
     case types.DELETE_STUDENT:
       let newStudentsAfterDeleted = state.list.filter(student =>
-        student.id !== action.id
+        student.id !== action.payload
       );
       return Object.assign({}, state, { list: newStudentsAfterDeleted });
 
@@ -33,6 +33,9 @@ export function student(state = initialState, action) {
 
     case types.ADD_STUDENT_TO_GROUP:
       return Object.assign({}, state, { list: [...(state.list), action.payload] });
+
+    case types.SET_ADD_NEW_STUDENT:
+      return Object.assign({}, state, { addNew: action.payload });
 
     default:
       return state;
