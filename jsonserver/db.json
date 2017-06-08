@@ -20,23 +20,23 @@
   "students": [
     {
       "studentName": "trung",
-      "groupId": "1",
+      "groupId": 1,
       "id": 1
     },
     {
+      "groupId": 3,
       "studentName": "chuong",
-      "groupId": "1",
       "id": 2
     },
     {
       "studentName": "nguyen",
-      "groupId": "5",
+      "groupId": 5,
       "id": 3
     },
     {
-      "studentName": "dung",
-      "groupId": "5",
-      "id": 4
+      "id": 4,
+      "groupId": 1,
+      "studentName": "nguyen"
     }
   ]
 }
