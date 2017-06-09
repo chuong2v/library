@@ -8,7 +8,10 @@ class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    let newEditField = props.value.length === 0; 
+    let newEditField = false;
+    if(props.value !== undefined && props.value !== null){
+      newEditField = props.value.length === 0;
+    }
     this.state = {
       text: props.value,
       errorText: '',
