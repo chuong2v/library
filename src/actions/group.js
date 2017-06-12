@@ -4,6 +4,14 @@ import * as StudentActions from './student'
 import api from './../api'
 const { Group } = api
 
+const fetchGroups = createAction(types.GROUP_FETCH, groups => groups)
+const addNewGroupToList = createAction(types.ADD_NEW_GROUP, group => group)
+const editGroupInList = createAction(types.EDIT_GROUP, group => group)
+const deleteGroupInList = createAction(types.DELETE_GROUP, id => id)
+
+export const setAddNewGroup = createAction(types.SET_STATE_ADD_NEW_GROUP, isAddNew => isAddNew)
+export const setSelectedGroup = createAction(types.SET_SELECTED_GROUP, id => id)
+
 export function fetchGroupsFromApi() {
   return (dispatch, getState) => {
     return Group.fetch().then(resp => {
@@ -11,8 +19,6 @@ export function fetchGroupsFromApi() {
     })
   }
 }
-
-let fetchGroups = createAction(types.GROUP_FETCH, groups => groups)
 
 export function addNewGroup(groupName) {
   return (dispatch, getState) => {
@@ -22,8 +28,6 @@ export function addNewGroup(groupName) {
     })
   }
 }
-let addNewGroupToList = createAction(types.ADD_NEW_GROUP, group => group)
-export const setAddNewGroup = createAction(types.SET_STATE_ADD_NEW_GROUP, isAddNew => isAddNew)
 
 export function editGroup(id, groupName) {
   return (dispatch, getState) => {
@@ -33,8 +37,6 @@ export function editGroup(id, groupName) {
   }
 }
 
-let editGroupInList = createAction(types.EDIT_GROUP, group => group)
-
 export function deleteGroup(id) {
   return (dispatch, getState) => {
     return Group.remove(id).then(resp => {
@@ -43,8 +45,6 @@ export function deleteGroup(id) {
   }
 }
 
-let deleteGroupInList = createAction(types.DELETE_GROUP, id => id)
-
 export function seeStudents(id) {
   return (dispatch, getState) => {
     return Group.getGroupStudents(id).then(resp => {
@@ -52,8 +52,6 @@ export function seeStudents(id) {
     })
   }
 }
-
-export const setSelectedGroup = createAction(types.SET_SELECTED_GROUP, id => id)
 
 export function addStudentToGroup(groupId, studentName) {
   return (dispatch, getState) => {
