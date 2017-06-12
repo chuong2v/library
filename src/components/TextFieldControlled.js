@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import * as GroupActions from '../../actions/group';
+import * as GroupActions from '../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

@@ -11,7 +11,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
-import TextFieldControlled from './TextFieldControlled';
+import TextFieldControlled from './../../components/TextFieldControlled';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -175,7 +175,6 @@ function mapStateToProps(state) {
   return {
     groups: state.group.list,
     addNew: state.group.addNew,
-    students: state.student.list,
     selectedGroup: state.group.selected
   }
 }

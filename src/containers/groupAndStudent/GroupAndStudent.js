@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { GridList, GridTile } from 'material-ui/GridList'
-import Group from '../group/Group'
-import Student from '../student/Student'
+import GroupContainer from '../group/GroupContainer'
+import StudentContainer from '../student/StudentContainer'
 import styles from './styles'
 import { ActionCreators } from '../../actions';
 import { connect } from 'react-redux'
@@ -24,8 +24,8 @@ class GroupAndStudent extends Component {
           padding={1}
           style={styles.gridList}
         >
-          <Group groups={groups} actions={actions} />
-          <Student groups={groups} students={students} actions={actions} />
+          <GroupContainer groups={groups} actions={actions} />
+          <StudentContainer groups={groups} students={students} actions={actions} />
         </GridList>
       </div>
     )

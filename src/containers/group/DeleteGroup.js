@@ -1,23 +1,22 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class DeleteGroup extends Component{
-    constructor(props, context){
-        super(props, context);
-        this.state = {
-            open: props.open,
-        };
-    }
-    
+class DeleteGroup extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      open: props.open,
+    };
+  }
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
   render() {

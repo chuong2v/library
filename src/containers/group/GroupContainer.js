@@ -12,7 +12,7 @@ import * as GroupActions from '../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class Group extends Component {
+class GroupContainer extends Component {
   constructor(props, context){
     super(props, context);
   }
@@ -43,7 +43,6 @@ function mapStateToProps(state) {
   return {
     groups: state.group.list,
     addNew: state.group.addNew,
-    students: state.student.list
   }
 }
 
@@ -53,4 +52,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Group)
+export default connect(mapStateToProps, mapDispatchToProps)(GroupContainer)

@@ -6,7 +6,6 @@ import { Translate } from 'react-redux-i18n'
 
 class UserManagement extends Component {
   render() {
-    const { groups, students, actions } = this.props;
     return (
       <Tabs
         initialSelectedIndex={1}
@@ -22,7 +21,7 @@ class UserManagement extends Component {
         <Tab label={<Translate value='menu.2' />}
           buttonStyle={styles.buttonStyle}
         >
-          <GroupAndStudent groups={groups} students={students} actions={actions}/>
+          <GroupAndStudent />
         </Tab>
         <Tab label={<Translate value='menu.3' />}
           buttonStyle={styles.buttonStyle}

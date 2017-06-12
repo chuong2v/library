@@ -10,10 +10,10 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import TextFieldControlled from '../group/TextFieldControlled';
+import TextFieldControlled from '../../components/TextFieldControlled';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import SelectFieldControlled from './SelectFieldControlled';
+import SelectFieldControlled from './../../components/SelectFieldControlled';
 import StudentActionCell from './StudentActionCell';
 import * as StudentActions from '../../actions/student'
 

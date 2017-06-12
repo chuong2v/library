@@ -13,7 +13,7 @@ import { ActionCreators } from '../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class Student extends Component {
+class StudentContainer extends Component {
   constructor(props, context) {
     super(props, context);
     let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
@@ -28,7 +28,6 @@ class Student extends Component {
   }
 
   handleOnAddNewStudents(studentnames) {
-    //slip by "\n" to save as a list of students into this.state.selectedGroupId
     console.log("calling handleOnAddNewStudents: " + studentnames);
   }
 
@@ -73,4 +72,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Student)
+export default connect(mapStateToProps, mapDispatchToProps)(StudentContainer)
