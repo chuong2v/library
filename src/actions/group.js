@@ -52,3 +52,13 @@ export function seeStudents(id) {
     })
   }
 }
+
+export const setSelectedGroup = createAction(types.SET_SELECTED_GROUP, id => id)
+
+export function addStudentToGroup(groupId, studentName) {
+  return (dispatch, getState) => {
+    return Group.addStudentToGroup(groupId, studentName).then(resp => {
+      dispatch(StudentActions.addNewStudentToGroup(resp.data))
+    })
+  }
+}
