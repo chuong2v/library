@@ -12,6 +12,7 @@ export default {
     title: "Grupos"
   },
   student: {
-    title: "Alumnas y alumnos"
+    title: "Alumnas y alumnos",
+    deleteConfirm: "Are you sure to delete this user?"
   }
 }

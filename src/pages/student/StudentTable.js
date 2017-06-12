@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './style.css'
 import styles from './styles'
-import { Translate, Localize } from 'react-redux-i18n'
+import { Translate } from 'react-redux-i18n'
 import {
   Table,
   TableBody,
@@ -131,20 +131,21 @@ class StudentTable extends Component {
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {students.map((row, index) => (
-              <TableRow selectable={!this.isRowEditing(row.id)}
+              <TableRow selectable={!this.isRowEditing(index)}
                 selected={this.isSelected(index)} key={index}>
                 <TableRowColumn>
-                  <TextFieldControlled value={row.studentName} editing={this.isRowEditing(row.id)}
+                  <TextFieldControlled value={row.studentName}
+                    editing={this.isRowEditing(row.id)}
                     onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
-                  <SelectFieldControlled groups={groups} idGroup={row.id}
+                  <SelectFieldControlled groups={groups} idGroup={row.groupId}
                     editing={this.isRowEditing(row.id)}
                     onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
                 </TableRowColumn>
                 <TableRowColumn style={{ overflow: 'visible' }}>
-                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(row.id)}
-                    onDelete={() => this.handleOnTouchTapDelete(row.id)}
-                    lastRow={this.isLastRow(index)} 
-                    editing={this.isRowEditing(row.id)}
+                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(index)}
+                    onDelete={() => this.handleOnTouchTapDelete(index)}
+                    lastRow={this.isLastRow(index)}
+                    editing={this.isRowEditing(index)}
                     onSave={() => this.handleOnSave(row.id)}
                     onCancel={() => this.handleOnCancel(row.id)} />
                 </TableRowColumn>
@@ -158,8 +159,8 @@ class StudentTable extends Component {
           open={this.state.openDeleteModal}
           onRequestClose={this.handleCloseOnDeleteModal.bind(this)}
         >
-          Are you sure to delete this user?
-      </Dialog>
+          <Translate value="student.deleteConfirm" />
+        </Dialog>
       </div>)
   }
 }

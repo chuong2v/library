@@ -27,14 +27,13 @@ class GroupTable extends Component {
     this.state = { 
       selected: [-1], 
       editing: null, 
-      penDeleteModal: false 
+      openDeleteModal: false 
     };
   }
 
   isSelected(row) {
     return this.props.selectedGroup === row.id;
   }
-
   handleRowSelection(selectedRowIds) {
     this.setState({
       selected: selectedRowIds

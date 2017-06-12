@@ -22,9 +22,7 @@ export function addNewGroup(groupName) {
     })
   }
 }
-
 let addNewGroupToList = createAction(types.ADD_NEW_GROUP, group => group)
-
 export const setAddNewGroup = createAction(types.SET_STATE_ADD_NEW_GROUP, isAddNew => isAddNew)
 
 export function editGroup(id, groupName) {

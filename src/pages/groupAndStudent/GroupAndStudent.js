@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 
 class GroupAndStudent extends Component {
   componentDidMount() {
-    this.props.actions.fetchGroupsFromApi().then(()=> {
+    this.props.actions.fetchGroupsFromApi().then(() => {
       let selectedGroup = this.props.groups[0].id
       this.props.actions.setSelectedGroup(selectedGroup)
       this.props.actions.seeStudents(selectedGroup)

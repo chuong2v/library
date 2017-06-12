@@ -24,8 +24,3 @@ export function editStudent(id, student) {
     })
   }
 }
-
-// export function editStudent(idGroup, idStudent, studentName) {
-//   return { type: types.EDIT_STUDENT, id: idStudent, idGroup: idGroup, studentName: studentName };
-// }
-

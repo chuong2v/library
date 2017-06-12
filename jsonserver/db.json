@@ -1,42 +1,62 @@
 {
   "groups": [
     {
-      "groupName": "Group 1",
+      "groupName": "new Group",
       "id": 1
     },
     {
-      "groupName": "Group 2",
-      "id": 2
+      "groupName": "1 cai nua",
+      "id": 5
     },
     {
-      "groupName": "Group 3",
-      "id": 3
+      "groupName": "them nua nao 1",
+      "id": 6
+    },
+    {
+      "groupName": "fsdafd",
+      "id": 8
     }
   ],
   "students": [
     {
-      "id": 1,
+      "studentName": "trung",
       "groupId": 1,
-      "studentName": "chuong"
+      "id": 1
     },
     {
-      "groupId": 2,
+      "groupId": 3,
       "studentName": "chuong",
       "id": 2
     },
     {
-      "id": 3,
+      "studentName": "nguyen",
+      "groupId": 5,
+      "id": 3
+    },
+    {
+      "id": 4,
       "groupId": 1,
       "studentName": "nguyen"
     },
     {
+      "studentName": "rq",
+      "groupId": "8",
       "id": 5
     },
     {
-      "id": 8
+      "studentName": "them moi",
+      "groupId": "8",
+      "id": 6
     },
     {
-      "id": 9
+      "studentName": "them cai moi",
+      "groupId": "8",
+      "id": 7
+    },
+    {
+      "studentName": "cai thu 2",
+      "groupId": "6",
+      "id": 8
     }
   ]
 }

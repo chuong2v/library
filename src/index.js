@@ -38,7 +38,6 @@ function configureStore(initialState) {
 }
 
 const store = configureStore({})
-console.log("store ", store.getState())
 const muiTheme = getMuiTheme({
 	appBar: {
 		height: 50,
