@@ -16,6 +16,15 @@ class Group extends Component {
   constructor(props, context){
     super(props, context);
   }
+
+  componentDidMount() {
+    this.props.actions.fetchGroupsFromApi().then(()=> {
+      let selectedGroup = this.props.groups[0] && this.props.groups[0].id
+      this.props.actions.setSelectedGroup(selectedGroup)
+      this.props.actions.seeStudents(selectedGroup)
+    })
+  }
+
   handleAddNewGroup(event){
     this.props.actions.setAddNewGroup(true)
   }
@@ -42,8 +51,7 @@ class Group extends Component {
 function mapStateToProps(state) {
   return {
     groups: state.group.list,
-    addNew: state.group.addNew,
-    students: state.student.list
+    addNew: state.group.addNew
   }
 }
 

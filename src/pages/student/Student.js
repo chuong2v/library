@@ -8,6 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import AddStudentPanel from './AddStudentPanel';
+import Promise from 'bluebird';
 
 import { ActionCreators } from '../../actions';
 import { connect } from 'react-redux'
@@ -16,24 +17,25 @@ import { bindActionCreators } from 'redux'
 class Student extends Component {
   constructor(props, context) {
     super(props, context);
-    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
-    this.state = { 
-      addNewStudents: false, 
-      selectedGroupId: selectedGroupId 
+    this.state = {
+      addNew: false
     };
   }
 
   handleAddNewStudents(event) {
-    this.props.actions.setAddNewStudent(!this.props.addNew);  
+    this.setState({ addNew: true })
   }
 
   handleOnAddNewStudents(studentnames) {
-    //slip by "\n" to save as a list of students into this.state.selectedGroupId
-    console.log("calling handleOnAddNewStudents: " + studentnames);
+    Promise.each(studentnames, studentName =>
+      studentName && this.props.actions.addStudentToGroup(this.props.selectedGroup, studentName)
+    ).then(() => {
+      this.setState({ addNew: false })
+    });
   }
 
   handleOnCancelAddNew() {
-    this.props.actions.setAddNewStudent(false);
+    this.setState({ addNew: false })
   }
 
   render() {
@@ -46,12 +48,15 @@ class Student extends Component {
             <FloatingActionButton mini
               className='student-add-button'
               onTouchTap={this.handleAddNewStudents.bind(this)}>
-              {this.props.addNew && <ContentClear/> || <ContentAdd />}
+              {this.state.addNew && <ContentClear /> || <ContentAdd />}
             </FloatingActionButton>
           </div>
-          <AddStudentPanel onAddNew={(studentNames) => this.handleOnAddNewStudents(studentNames)} 
-            onCancel={() => this.handleOnCancelAddNew()} 
-            show={this.props.addNew} />
+          <AddStudentPanel
+            onAddNew={(studentNames) => this.handleOnAddNewStudents(studentNames)}
+            onCancel={() => this.handleOnCancelAddNew()}
+            show={this.state.addNew}
+            actions={this.props.actions}
+            selectedGroup={this.props.selectedGroup} />
           <StudentTable groups={groups} students={students} {...actions} />
         </Paper>
       </div>
@@ -63,6 +68,7 @@ function mapStateToProps(state) {
   return {
     addNew: state.student.addNew,
     students: state.student.list,
+    groups: state.group.list,
     selectedGroup: state.group.selected
   }
 }

@@ -21,7 +21,7 @@ import * as GroupActions from '../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class StudentTable extends Component {
+export default class StudentTable extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -57,7 +57,7 @@ class StudentTable extends Component {
   }
 
   handleDeleteOnDeleteModal() {
-    this.props.actions.deleteStudent(this.state.deleting);
+    this.props.deleteStudent(this.state.deleting);
     this.setState({
       openDeleteModal: false
     });
@@ -99,7 +99,7 @@ class StudentTable extends Component {
       groupId: editingGroupId,
       studentName: this.state.editingStudentName
     }
-    this.props.actions.editStudent(idStudent, student);
+    this.props.editStudent(idStudent, student);
   }
 
   handleOnCancel(idStudent) {
@@ -134,16 +134,18 @@ class StudentTable extends Component {
               <TableRow selectable={!this.isRowEditing(row.id)}
                 selected={this.isSelected(index)} key={index}>
                 <TableRowColumn>
-                  <TextFieldControlled value={row.studentName} editing={this.isRowEditing(row.id)}
+                  <TextFieldControlled value={row.studentName}
+                    editing={this.isRowEditing(row.id)}
                     onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
-                  <SelectFieldControlled groups={groups} idGroup={row.id}
+                  <SelectFieldControlled groups={groups}
+                    idGroup={row.groupId}
                     editing={this.isRowEditing(row.id)}
                     onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
                 </TableRowColumn>
                 <TableRowColumn style={{ overflow: 'visible' }}>
                   <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(row.id)}
                     onDelete={() => this.handleOnTouchTapDelete(row.id)}
-                    lastRow={this.isLastRow(index)} 
+                    lastRow={this.isLastRow(index)}
                     editing={this.isRowEditing(row.id)}
                     onSave={() => this.handleOnSave(row.id)}
                     onCancel={() => this.handleOnCancel(row.id)} />
@@ -163,18 +165,3 @@ class StudentTable extends Component {
       </div>)
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    addNew: state.student.addNew,
-    students: state.student.list
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(StudentActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StudentTable)

@@ -6,7 +6,7 @@ export default class SelectFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: this.props.id };
+    this.state = { value: props.idGroup };
   }
 
   handleChange(event, index, value) {
