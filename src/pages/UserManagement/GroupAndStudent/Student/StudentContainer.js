@@ -1,16 +1,16 @@
+import Promise from 'bluebird';
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
-import StudentTable from './StudentTable'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentClear from 'material-ui/svg-icons/content/clear';
-import AddStudentPanel from './AddStudentPanel';
-import Promise from 'bluebird';
+import StudentTable from './components/StudentTable'
+import AddStudentPanel from './components/AddStudentPanel';
 
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from './../../../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -79,4 +79,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Student)
+export default connect(mapStateToProps, mapDispatchToProps)(StudentContainer)

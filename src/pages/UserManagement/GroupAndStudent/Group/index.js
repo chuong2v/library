@@ -1,5 +1,3 @@
-import Group from './Group'
+import GroupContainer from './GroupContainer'
 
-export default {
-  Group
-}
+export default GroupContainer

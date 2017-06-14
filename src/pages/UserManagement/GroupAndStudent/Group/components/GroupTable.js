@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './style.css'
-import styles from './styles'
+import './../style.css'
+import styles from './../styles'
 import { Translate, Localize } from 'react-redux-i18n'
 import {
   Table,
@@ -11,12 +11,12 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
-import TextFieldControlled from './../../components/TextFieldControlled';
+import TextFieldControlled from './../../../../../components/TextFieldControlled';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import * as GroupActions from '../../actions/group';
+import * as GroupActions from '../../../../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

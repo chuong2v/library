@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './style.css'
-import styles from './styles'
-import { Translate, Localize } from 'react-redux-i18n'
+import './../style.css'
+import styles from './../styles'
+import { Translate } from 'react-redux-i18n'
 import {
   Table,
   TableBody,
@@ -10,16 +10,11 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import TextFieldControlled from '../../components/TextFieldControlled';
+import TextFieldControlled from '../../../../../components/TextFieldControlled';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import SelectFieldControlled from './SelectFieldControlled';
 import StudentActionCell from './StudentActionCell';
-import * as StudentActions from '../../actions/student'
-
-import * as GroupActions from '../../actions/group';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 export default class StudentTable extends Component {
 

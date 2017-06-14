@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom'
-import UserManagement from './pages/userManagement'
+import UserManagement from './pages/UserManagement'
 
 class App extends Component {
   render() {

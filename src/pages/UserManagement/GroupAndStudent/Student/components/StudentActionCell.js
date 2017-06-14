@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './style.css'
-import styles from './styles'
+import './../style.css'
+import styles from './../styles'
 import { Translate, Localize } from 'react-redux-i18n'
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';

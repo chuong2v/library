@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
-import { ActionCreators } from '../../actions';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 export default class AddStudentPanel extends Component {
   constructor(props) {
     super(props);

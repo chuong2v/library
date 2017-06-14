@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { GridList } from 'material-ui/GridList'
-import Group from '../group/Group'
-import Student from '../student/Student'
+import Group from './Group'
+import Student from './Student'
 import styles from './styles'
 
 export default class GroupAndStudent extends Component {

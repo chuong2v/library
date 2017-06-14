@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Tabs, Tab } from 'material-ui/Tabs'
-import GroupAndStudent from '../groupAndStudent'
+import GroupAndStudent from './GroupAndStudent'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
 

@@ -3,16 +3,16 @@ import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
-import GroupTable from './GroupTable'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-import * as GroupActions from '../../actions/group';
+import GroupTable from './components/GroupTable'
+import * as GroupActions from '../../../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class Group extends Component {
+class GroupContainer extends Component {
   constructor(props, context){
     super(props, context);
   }
@@ -61,4 +61,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Group)
+export default connect(mapStateToProps, mapDispatchToProps)(GroupContainer)
