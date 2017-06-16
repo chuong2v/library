@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import * as GroupActions from '../actions/group';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
-class TextFieldControlled extends Component {
+export default class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
@@ -20,10 +21,9 @@ class TextFieldControlled extends Component {
     if (e.keyCode === 13) {
       const text = e.target.value.trim();
       if (text === '') {
-        this.setState({ errorText: 'This field is required' })
+        this.setState({ errorText: 'This field is required' });
       } else {
         this.props.onSave(text);
-        // this.refs.textField.blur();
       }
     }
   }
@@ -35,22 +35,39 @@ class TextFieldControlled extends Component {
   handleBlur(e) {
     const text = e.target.value.trim();
     if (this.props.dataId === -1) {
-      this.props.actions.setAddNewGroup(false)
+      this.props.onCancel(text);
     } else if (text === '') {
-      this.setState({ errorText: 'This field is required' })
+      this.setState({ errorText: 'This field is required' });
     } else {
       this.props.onSave(text);
     }
   }
 
+  componentWillMount() {
+    const id = _.uniqueId("textField-");
+    this.setState({id: id, text: this.props.value});
+  }
+  /**
+   * Many textfields maintain a single state object.
+   * During the switching between of different groups to see its students, only the props are updated.
+   * In the edit mode, the value is assigned by {this.state.text} and not changed when selecting other group.
+   * Therefore, we have to update this state's text to show the correct textfield's value.
+   */
+  componentWillReceiveProps(nextProps){
+    if(this.props.editing !== nextProps.editing){
+      this.setState({text: this.props.value});
+    }
+  }
+
+
   render() {
     if (this.props.editing || this.state.newEditField) {
       return (
         <div>
-          <TextField ref='textField'
+          <TextField
+            id = {this.state.id}
             onKeyDown={this.handleEnter.bind(this)}
             autoFocus={true}
-            id="text-field-controlled"
             value={this.state.text}
             onBlur={this.handleBlur.bind(this)}
             onChange={this.handleChange.bind(this)}
@@ -63,16 +80,3 @@ class TextFieldControlled extends Component {
 
   }
 }
-
-function mapStateToProps(state) {
-  return {
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(GroupActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TextFieldControlled)

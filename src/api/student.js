@@ -12,6 +12,6 @@ export function update(id, params) {
   return api.put(`students/${id}`, params)
 }
 
-export function remove(id) {
-  return api.delete(`students/${id}`)
+export function remove(idGroup, idStudent) {
+  return api.delete(`groups/${idGroup}/students/${idStudent}`)
 }

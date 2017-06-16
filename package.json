@@ -32,5 +32,6 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:8080/PGELite/sv/"
 }

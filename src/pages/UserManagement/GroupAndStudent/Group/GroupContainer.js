@@ -18,18 +18,18 @@ class GroupContainer extends Component {
   }
 
   componentDidMount() {
+    let self = this;
     this.props.actions.fetchGroupsFromApi().then(()=> {
-      let selectedGroup = this.props.groups[0] && this.props.groups[0].id
-      this.props.actions.setSelectedGroup(selectedGroup)
-      this.props.actions.seeStudents(selectedGroup)
+      let selectedGroup = this.props.groups[0] && this.props.groups[0].idGroup;
+      this.props.actions.setSelectedGroup(selectedGroup);
     })
   }
 
   handleAddNewGroup(event){
-    this.props.actions.setAddNewGroup(true)
+    this.props.actions.setAddNewGroup(true);
   }
   render() {
-    const { groups, actions } = this.props;
+    const { groups, actions, addNew, selectedGroup } = this.props;
     return (
       <div className='group-container'>
         <Paper className='group' style={styles.container} zDepth={1} >
@@ -41,7 +41,7 @@ class GroupContainer extends Component {
               <ContentAdd />
             </FloatingActionButton>
           </div>
-          <GroupTable groups={groups} {...actions}/>
+          <GroupTable groups={groups} {...actions} addNew={addNew} selectedGroup={selectedGroup}/>
         </Paper>
       </div>
     )
@@ -51,7 +51,8 @@ class GroupContainer extends Component {
 function mapStateToProps(state) {
   return {
     groups: state.group.list,
-    addNew: state.group.addNew
+    addNew: state.group.addNew,
+    selectedGroup: state.group.selected
   }
 }
 

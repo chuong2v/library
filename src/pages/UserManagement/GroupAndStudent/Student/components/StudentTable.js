@@ -20,7 +20,7 @@ export default class StudentTable extends Component {
 
   constructor(props, context) {
     super(props, context);
-    let selectedGroupId = (props.students && props.students.length > 0) ? props.students[0].id : null;
+    let selectedGroupId = props.selectedGroup;
     this.state = { selected: [-1], editing: null, openDeleteModal: false, editingStudentName: null, editingGroupId: null, selectedGroupId: selectedGroupId };
   }
 
@@ -47,12 +47,12 @@ export default class StudentTable extends Component {
     });
   }
 
-  isRowEditing(index) {
-    return this.state.editing === index;
+  isRowEditing(idStudent) {
+    return this.state.editing === idStudent;
   }
 
   handleDeleteOnDeleteModal() {
-    this.props.deleteStudent(this.state.deleting);
+    this.props.deleteStudent(this.props.selectedGroup, this.state.deleting);
     this.setState({
       openDeleteModal: false
     });
@@ -82,19 +82,20 @@ export default class StudentTable extends Component {
   }
 
   handleOnSave(idStudent) {
-    let studentName, idGroup;
     let editingGroupId = this.state.editingGroupId;
     if (!this.state.editingGroupId) {
-      editingGroupId = this.state.selectedGroupId;
+      editingGroupId = this.props.selectedGroup;
     }
     if (this.state.editingStudentName === null || this.state.editingStudentName === undefined || this.state.editingStudentName.trim().length === 0) {
       return;
     }
     let student = {
-      groupId: editingGroupId,
+      idStudent: idStudent,
+      idGroup: editingGroupId,
       studentName: this.state.editingStudentName
     }
-    this.props.editStudent(idStudent, student);
+    this.props.editStudent(this.props.selectedGroup, student);
+    this.setState({editing: null});
   }
 
   handleOnCancel(idStudent) {
@@ -126,24 +127,24 @@ export default class StudentTable extends Component {
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {students.map((row, index) => (
-              <TableRow selectable={!this.isRowEditing(row.id)}
+              <TableRow selectable={!this.isRowEditing(row.idStudent)}
                 selected={this.isSelected(index)} key={index}>
                 <TableRowColumn>
                   <TextFieldControlled value={row.studentName}
-                    editing={this.isRowEditing(row.id)}
-                    onSave={(text) => this.handleOnSaveStudentName(row.id, text)} />
+                    editing={this.isRowEditing(row.idStudent)}
+                    onSave={(text) => this.handleOnSaveStudentName(row.idStudent, text)} />
                   <SelectFieldControlled groups={groups}
-                    idGroup={row.groupId}
-                    editing={this.isRowEditing(row.id)}
-                    onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.id, event, key, payload)} />
+                    idGroup={row.idGroup}
+                    editing={this.isRowEditing(row.idStudent)}
+                    onChange={(event, key, payload) => this.handOnChangeGroupOfStudent(row.idStudent, event, key, payload)} />
                 </TableRowColumn>
                 <TableRowColumn style={{ overflow: 'visible' }}>
-                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(row.id)}
-                    onDelete={() => this.handleOnTouchTapDelete(row.id)}
+                  <StudentActionCell onEdit={() => this.handleOnTouchTapEdit(row.idStudent)}
+                    onDelete={() => this.handleOnTouchTapDelete(row.idStudent)}
                     lastRow={this.isLastRow(index)}
-                    editing={this.isRowEditing(row.id)}
-                    onSave={() => this.handleOnSave(row.id)}
-                    onCancel={() => this.handleOnCancel(row.id)} />
+                    editing={this.isRowEditing(row.idStudent)}
+                    onSave={() => this.handleOnSave(row.idStudent)}
+                    onCancel={() => this.handleOnCancel(row.idStudent)} />
                 </TableRowColumn>
               </TableRow>
             ))}

@@ -8,18 +8,18 @@ export const fetchedStudents = createAction(types.STUDENT_FETCH, students => stu
 export const addNewStudentToGroup = createAction(types.ADD_STUDENT_TO_GROUP, student => student)
 
 let removeStudentOutOfList = createAction(types.DELETE_STUDENT, id => id)
-export function deleteStudent(id) {
+export function deleteStudent(idGroup,idStudent) {
   return (dispatch, getState) => {
-    return Student.remove(id).then(resp => {
-      dispatch(removeStudentOutOfList(id))
+    return Student.remove(idGroup, idStudent).then(resp => {
+      dispatch(removeStudentOutOfList(idStudent));
     })
   }
 }
 
-export function editStudent(id, student) {
+export function editStudent(selectedGroupId, student) {
   return (dispatch, getState) => {
-    return Student.update(id, student).then(resp => {
-      dispatch(GroupActions.seeStudents(student.groupId))
+    return Student.update(student.idStudent, student).then(resp => {
+      dispatch(GroupActions.seeStudents(selectedGroupId))
     })
   }
 }

@@ -23,19 +23,19 @@ class StudentContainer extends Component {
   }
 
   handleAddNewStudents(event) {
-    this.setState({ addNew: true })
+    this.setState({ addNew: true });
   }
 
   handleOnAddNewStudents(studentnames) {
     Promise.each(studentnames, studentName =>
       studentName && this.props.actions.addStudentToGroup(this.props.selectedGroup, studentName)
     ).then(() => {
-      this.setState({ addNew: false })
+      this.setState({ addNew: false });
     });
   }
 
   handleOnCancelAddNew() {
-    this.setState({ addNew: false })
+    this.setState({ addNew: false });
   }
 
   render() {
@@ -57,7 +57,7 @@ class StudentContainer extends Component {
             show={this.state.addNew}
             actions={this.props.actions}
             selectedGroup={this.props.selectedGroup} />
-          <StudentTable groups={groups} students={students} {...actions} />
+          <StudentTable groups={groups} selectedGroup={this.props.selectedGroup} students={students} {...actions} />
         </Paper>
       </div>
     )

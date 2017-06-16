@@ -20,44 +20,36 @@ import * as GroupActions from '../../../../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class GroupTable extends Component {
+export default class GroupTable extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = { 
-      selected: [-1], 
-      editing: null, 
-      penDeleteModal: false 
+      selected: [-1], //indicate which group is being selected
+      editing: null,  //the row is in the edit mode or not
+      openDeleteModal: false //control the delete modal.
     };
   }
 
   isSelected(row) {
-    return this.props.selectedGroup === row.id;
+    return this.props.selectedGroup === row.idGroup;
   }
 
   handleRowSelection(selectedRowIds) {
-    this.setState({
-      selected: selectedRowIds
-    });
-    // if the selected row is empty row, set it as editing row and focus to it.
-    if (selectedRowIds[0] === -1) {
-      this.setState({
-        editing: selectedRowIds
-      });
-    }
+    this.setState({selected: selectedRowIds});
   }
 
   isLastRow(index) {
     return this.props.groups.length - 1 === index;
   }
 
-  isRowEditing(index) {
-    return this.state.editing === index;
+  isRowEditing(idGroup) {
+    return this.state.editing === idGroup;
   }
 
   handleOnTouchTapList(event, selectedRowId) {
     this.handleRowSelection([selectedRowId]);
-    this.props.actions.seeStudents(selectedRowId);
+    this.props.seeStudents(selectedRowId);
   }
   handleOnTouchTapEdit(event, selectedRowId) {
     this.handleRowSelection([selectedRowId]);
@@ -80,7 +72,7 @@ class GroupTable extends Component {
 
   handleDeleteOnDeleteModal() {
     if (this.state.deleting === -1) {
-      this.props.actions.setAddNewGroup(false)
+      this.props.setAddNewGroup(false);
     } else {
       this.props.deleteGroup(this.state.deleting);
     }
@@ -91,43 +83,54 @@ class GroupTable extends Component {
 
   handleOnSave(idGroup, text) {
     if (idGroup === -1) {
-      this.props.actions.addNewGroup(text)
+      this.props.addNewGroup(text);
     } else {
-      this.props.actions.editGroup(idGroup, text);
+      this.props.editGroup(idGroup, text);
       this.setState({ editing: null });
     }
   }
 
-  setSelectedGroup(group) {
-    this.props.actions.setSelectedGroup(group.id)
-    this.props.actions.seeStudents(group.id)
+  handleOnCancel(idGroup, text){
+    if(idGroup == -1){
+      this.props.setAddNewGroup(false);
+    }
   }
 
-  renderRow(index = 0, row = { id: -1, groupName: "" }) {
+  setSelectedGroup(group) {
+    this.props.setSelectedGroup(group.idGroup);
+  }
+
+/**
+ * Render a row of a group table.
+ * @param {*} index: the index of the row, default: 0 
+ * @param {*} row : presents for a group, default: idGroup: -1, groupName: ''
+ */
+  renderRow(index = 0, row = { idGroup: -1, groupName: "" }) {
     let rowActions = (
       <TableRowColumn style={{ overflow: 'visible' }}>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapList(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapList(event, row.idGroup)}
           iconClassName="material-icons"
           tooltip="Students" tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>account_box</IconButton>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapEdit(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapEdit(event, row.idGroup)}
           iconClassName="material-icons" tooltip="Edit"
           tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>mode_edit</IconButton>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapDelete(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapDelete(event, row.idGroup)}
           iconClassName="material-icons" tooltip="Delete"
           tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>delete</IconButton>
       </TableRowColumn>
     )
     return (
-      <TableRow selectable={!this.isRowEditing(row.id)}
+      <TableRow selectable={!this.isRowEditing(row.idGroup)}
         selected={this.isSelected.bind(this)(row)} key={index}
         onTouchTap={this.setSelectedGroup.bind(this, row)}>
         <TableRowColumn>
           <TextFieldControlled value={row.groupName}
-            editing={this.isRowEditing(row.id)}
-            dataId={row.id}
-            onSave={(text) => this.handleOnSave(row.id, text)} />
+            editing={this.isRowEditing(row.idGroup)}
+            dataId={row.idGroup}
+            onSave={(text) => this.handleOnSave(row.idGroup, text)}
+            onCancel={()=> this.handleOnCancel(row.idGroup)} />
         </TableRowColumn>
-        {row.id != -1 && rowActions || null}
+        {row.idGroup != -1 && rowActions || null}
       </TableRow>
     )
   }
@@ -144,7 +147,7 @@ class GroupTable extends Component {
         label="Delete"
         primary={true}
         onTouchTap={this.handleDeleteOnDeleteModal.bind(this)}
-      />,
+      />
     ];
 
     return (<div><Table onRowSelection={this.handleRowSelection.bind(this)}>
@@ -171,20 +174,3 @@ class GroupTable extends Component {
     )
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    groups: state.group.list,
-    addNew: state.group.addNew,
-    students: state.student.list,
-    selectedGroup: state.group.selected
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(GroupActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GroupTable)

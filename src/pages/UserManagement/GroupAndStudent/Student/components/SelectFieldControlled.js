@@ -10,9 +10,22 @@ export default class SelectFieldControlled extends Component {
   }
 
   handleChange(event, index, value) {
-    this.setState({ value });
+    this.setState({ value: value });
     this.props.onChange(event, index, value);
   }
+
+  /**
+   * Many SelectFields maintain a single state object.
+   * During the switching between of different groups to see its students, only the props are updated.
+   * In the edit mode, the value is assigned by {this.state.value} and not changed when selecting other group.
+   * Therefore, we have to update this state's value to show the correct value.
+   */
+  componentWillReceiveProps(nextProps){
+    if(this.props.editing !== nextProps.editing){
+      this.setState({value: this.props.idGroup});
+    }
+  }
+
   render() {
     const { groups } = this.props;
     if (!this.props.editing) {
@@ -21,11 +34,10 @@ export default class SelectFieldControlled extends Component {
     return (
       <div>
         <SelectField
-          floatingLabelText="Select group"
           value={this.state.value}
           onChange={this.handleChange.bind(this)}>
           {groups.map((group, index) => (
-            <MenuItem key={index} value={group.id} primaryText={group.groupName} />
+            <MenuItem key={index} value={group.idGroup} primaryText={group.groupName} />
           ))}
         </SelectField>
       </div>

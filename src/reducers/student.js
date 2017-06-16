@@ -16,7 +16,7 @@ export function student(state = initialState, action) {
     // should belong to student reducer. refactor later
     case types.DELETE_STUDENT:
       let newStudentsAfterDeleted = state.list.filter(student =>
-        student.id !== action.payload
+        student.idStudent !== action.payload
       );
       return Object.assign({}, state, { list: newStudentsAfterDeleted });
 
