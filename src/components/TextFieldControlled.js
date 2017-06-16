@@ -9,11 +9,7 @@ export default class TextFieldControlled extends Component {
 
   constructor(props) {
     super(props);
-    let newEditField = false;
-    if(props.value !== undefined && props.value !== null){
-      newEditField = props.value.length === 0;
-    }
-    this.originalText = props.value;
+    let newEditField = props.value.length === 0;
     this.state = {
       text: props.value,
       errorText: '',
@@ -27,7 +23,6 @@ export default class TextFieldControlled extends Component {
       if (text === '') {
         this.setState({ errorText: 'This field is required' });
       } else {
-        this.setState({text:text});
         this.props.onSave(text);
       }
     }
@@ -42,21 +37,15 @@ export default class TextFieldControlled extends Component {
     if (this.props.dataId === -1) {
       this.props.onCancel(text);
     } else if (text === '') {
-<<<<<<< HEAD:src/pages/group/TextFieldControlled.js
-      this.setState({ errorText: 'This field is required' })
-    } else{
-      this.setState({text:text});
-=======
       this.setState({ errorText: 'This field is required' });
     } else {
->>>>>>> refactor-containter:src/components/TextFieldControlled.js
       this.props.onSave(text);
     }
   }
 
   componentWillMount() {
     const id = _.uniqueId("textField-");
-    this.setState({id: id, text: this.props.value});
+    this.setState({id: id});
   }
   /**
    * Many textfields maintain a single state object.
