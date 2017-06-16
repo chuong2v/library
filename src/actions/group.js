@@ -7,7 +7,7 @@ const { Group } = api
 export function fetchGroupsFromApi() {
   return (dispatch, getState) => {
     return Group.fetch().then(resp => {
-      dispatch(fetchGroups(resp && resp.data || []))
+      dispatch(fetchGroups(resp && resp.data.results || []))
     })
   }
 }

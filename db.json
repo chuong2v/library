@@ -1,16 +1,16 @@
 {
   "groups": [
     {
-      "groupName": "Group 2",
+      "groupName": "one",
+      "id": 1
+    },
+    {
+      "groupName": "two",
+      "id": 2
+    },
+    {
+      "groupName": "new gourp",
       "id": 3
-    },
-    {
-      "groupName": "afsfsagas tui lai edit tiep them lan sau cuoi cung",
-      "id": 18
-    },
-    {
-      "groupName": "afsfsagas tui moi edit them lan nua",
-      "id": 19
     }
   ],
   "students": []

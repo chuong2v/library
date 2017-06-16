@@ -3,24 +3,33 @@ import Paper from 'material-ui/Paper'
 import './style.css'
 import styles from './styles'
 import { Translate } from 'react-redux-i18n'
-import GroupTable from './GroupTable'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-import * as GroupActions from '../../actions/group';
+import GroupTable from './components/GroupTable'
+import * as GroupActions from '../../../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class Group extends Component {
+class GroupContainer extends Component {
   constructor(props, context){
     super(props, context);
   }
+
+  componentDidMount() {
+    let self = this;
+    this.props.actions.fetchGroupsFromApi().then(()=> {
+      let selectedGroup = this.props.groups[0] && this.props.groups[0].idGroup;
+      this.props.actions.setSelectedGroup(selectedGroup);
+    })
+  }
+
   handleAddNewGroup(event){
-    this.props.actions.setAddNewGroup(true)
+    this.props.actions.setAddNewGroup(true);
   }
   render() {
-    const { groups, actions } = this.props;
+    const { groups, actions, addNew, selectedGroup } = this.props;
     return (
       <div className='group-container'>
         <Paper className='group' style={styles.container} zDepth={1} >
@@ -32,7 +41,7 @@ class Group extends Component {
               <ContentAdd />
             </FloatingActionButton>
           </div>
-          <GroupTable groups={groups} {...actions}/>
+          <GroupTable groups={groups} {...actions} addNew={addNew} selectedGroup={selectedGroup}/>
         </Paper>
       </div>
     )
@@ -43,7 +52,7 @@ function mapStateToProps(state) {
   return {
     groups: state.group.list,
     addNew: state.group.addNew,
-    students: state.student.list
+    selectedGroup: state.group.selected
   }
 }
 
@@ -53,4 +62,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Group)
+export default connect(mapStateToProps, mapDispatchToProps)(GroupContainer)
