@@ -23,7 +23,7 @@ class StudentContainer extends Component {
   }
 
   handleAddNewStudents(event) {
-    this.setState({ addNew: true });
+      this.setState({ addNew: true });
   }
 
   handleOnAddNewStudents(studentnames) {
@@ -45,7 +45,7 @@ class StudentContainer extends Component {
         <Paper className='student' style={styles.container} zDepth={1} >
           <div className='student-bar'>
             <Translate value='student.title' />
-            <FloatingActionButton mini
+            <FloatingActionButton mini disabled = {!this.props.selectedGroup || groups.length == 0}
               className='student-add-button'
               onTouchTap={this.handleAddNewStudents.bind(this)}>
               {this.state.addNew && <ContentClear /> || <ContentAdd />}
