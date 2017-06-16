@@ -18,14 +18,14 @@ export function group(state = initialState, action) {
 
     case types.ADD_EMPTY_GROUP:
       let newGroupIncludeEmptyGroup = [{
-        id: '',
+        idGroup: '',
         groupName: '',
         del: 0
       }, ...state.list];
       return Object.assign({}, state, { list: newGroupIncludeEmptyGroup });
     case types.EDIT_GROUP:
       let newGroupsAfterEdited = state.list.map(group =>
-        group.id === action.payload.id ?
+        group.idGroup === action.payload.idGroup ?
           Object.assign({}, group, { groupName: action.payload.groupName }) :
           group
       );
@@ -33,12 +33,12 @@ export function group(state = initialState, action) {
 
     case types.DELETE_GROUP:
       let newGroupsAfterDeleted = state.list.filter(group =>
-        group.id !== action.payload
+        group.idGroup !== action.payload
       );
       return Object.assign({}, state, { list: newGroupsAfterDeleted });
 
     case types.GROUP_FETCH:
-      return Object.assign({}, state, { list: action.payload });
+      return Object.assign({}, state, { list: action.payload.results });
     case types.SET_STATE_ADD_NEW_GROUP:
       return Object.assign({}, state, { addNew: action.payload });
     case types.SET_SELECTED_GROUP:
