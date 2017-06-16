@@ -19,7 +19,7 @@ import FlatButton from 'material-ui/FlatButton';
 import * as GroupActions from '../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
+import axios from 'axios';
 class GroupTable extends Component {
 
   constructor(props, context) {
@@ -31,8 +31,35 @@ class GroupTable extends Component {
     };
   }
 
+  fetchGroup() {
+    axios.get('sv/groups',{
+      withCredentials: true
+    })
+       .then(res => {
+         const posts = res;
+         console.log(JSON.stringify(res));
+       }).catch(err => {
+        console.log(err);
+      });
+    fetch('sv/groups', {
+        credentials: 'include',
+         headers: {
+        'Accept':  'application/json',
+        'Content-Type': 'application/json',
+        'Cache': 'no-cache'
+        }
+    }).then(this.fetchGroupOnReturn)
+      .then(users => console.log("fetchgroup: " +  JSON.stringify(users)))
+      .catch(err => {
+        console.log("fetch: " + err);
+      });
+  }
+
+  fetchGroupOnReturn(res){
+    return res.json();
+  }
   isSelected(row) {
-    return this.props.selectedGroup === row.id;
+    return this.props.selectedGroup === row.idGroup;
   }
 
   handleRowSelection(selectedRowIds) {
@@ -99,35 +126,35 @@ class GroupTable extends Component {
   }
 
   setSelectedGroup(group) {
-    this.props.actions.setSelectedGroup(group.id)
-    this.props.actions.seeStudents(group.id)
+    this.props.actions.setSelectedGroup(group.idGroup);
+    // this.props.actions.seeStudents(group.id)
   }
 
-  renderRow(index = 0, row = { id: -1, groupName: "" }) {
+  renderRow(index = 0, row = {idGroup: -1, groupName: "" }) {
     let rowActions = (
       <TableRowColumn style={{ overflow: 'visible' }}>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapList(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapList(event, row.idGroup)}
           iconClassName="material-icons"
           tooltip="Students" tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>account_box</IconButton>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapEdit(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapEdit(event, row.idGroup)}
           iconClassName="material-icons" tooltip="Edit"
           tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>mode_edit</IconButton>
-        <IconButton onTouchTap={(event) => this.handleOnTouchTapDelete(event, row.id)}
+        <IconButton onTouchTap={(event) => this.handleOnTouchTapDelete(event, row.idGroup)}
           iconClassName="material-icons" tooltip="Delete"
           tooltipPosition={this.isLastRow(index) ? 'top-center' : 'bottom-center'}>delete</IconButton>
       </TableRowColumn>
     )
     return (
-      <TableRow selectable={!this.isRowEditing(row.id)}
+      <TableRow selectable={!this.isRowEditing(row.idGroup)}
         selected={this.isSelected.bind(this)(row)} key={index}
         onTouchTap={this.setSelectedGroup.bind(this, row)}>
         <TableRowColumn>
           <TextFieldControlled value={row.groupName}
-            editing={this.isRowEditing(row.id)}
-            dataId={row.id}
-            onSave={(text) => this.handleOnSave(row.id, text)} />
+            editing={this.isRowEditing(row.idGroup)}
+            dataId={row.idGroup}
+            onSave={(text) => this.handleOnSave(row.idGroup, text)} />
         </TableRowColumn>
-        {row.id != -1 && rowActions || null}
+        {row.idGroup != -1 && rowActions || null}
       </TableRow>
     )
   }

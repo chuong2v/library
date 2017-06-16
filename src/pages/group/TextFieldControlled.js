@@ -12,6 +12,7 @@ class TextFieldControlled extends Component {
     if(props.value !== undefined && props.value !== null){
       newEditField = props.value.length === 0;
     }
+    this.originalText = props.value;
     this.state = {
       text: props.value,
       errorText: '',
@@ -25,6 +26,7 @@ class TextFieldControlled extends Component {
       if (text === '') {
         this.setState({ errorText: 'This field is required' })
       } else {
+        this.setState({text:text});
         this.props.onSave(text);
         // this.refs.textField.blur();
       }
@@ -32,7 +34,7 @@ class TextFieldControlled extends Component {
   }
 
   handleChange(e) {
-    this.setState({ text: e.target.value });
+        this.setState({ text: e.target.value});
   }
 
   handleBlur(e) {
@@ -41,7 +43,8 @@ class TextFieldControlled extends Component {
       this.props.actions.setAddNewGroup(false)
     } else if (text === '') {
       this.setState({ errorText: 'This field is required' })
-    } else {
+    } else{
+      this.setState({text:text});
       this.props.onSave(text);
     }
   }

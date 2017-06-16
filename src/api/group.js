@@ -1,7 +1,7 @@
 import api from './config'
 
 export function fetch() {
-  return api.get('groups?_sort=id&_order=desc')
+  return api.get('groups');
 }
 
 export function create(params) {
@@ -9,7 +9,7 @@ export function create(params) {
 }
 
 export function update(groupId, params) {
-  return api.put(`groups/${groupId}`, params)
+  return api.put(`groups/${groupId}`, params);
 }
 
 export function remove(groupId) {
