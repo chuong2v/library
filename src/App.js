@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom'
 import UserManagement from './pages/UserManagement'
-
+/**
+ * The root component to render all the pages of our website.
+ */
 class App extends Component {
   render() {
     return (

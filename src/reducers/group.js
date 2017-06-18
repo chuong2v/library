@@ -42,7 +42,7 @@ export function group(state = initialState, action) {
     case types.SET_STATE_ADD_NEW_GROUP:
       return Object.assign({}, state, { addNew: action.payload });
     case types.SET_SELECTED_GROUP:
-      return Object.assign({}, state, { selected: parseInt(action.payload) });
+      return Object.assign({}, state, { selected: parseInt(action.payload,10) });
     default:
       return state;
   }

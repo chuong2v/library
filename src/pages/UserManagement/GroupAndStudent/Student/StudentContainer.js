@@ -2,7 +2,6 @@ import Promise from 'bluebird';
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
-import styles from './styles'
 import { Translate } from 'react-redux-i18n'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -14,6 +13,12 @@ import { ActionCreators } from './../../../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+
+const styles = {container: {
+    display: 'inline-block',
+    backgroundColor: '#f2f2f2'
+  }
+};
 class StudentContainer extends Component {
   constructor(props, context) {
     super(props, context);
@@ -45,7 +50,7 @@ class StudentContainer extends Component {
         <Paper className='student' style={styles.container} zDepth={1} >
           <div className='student-bar'>
             <Translate value='student.title' />
-            <FloatingActionButton mini disabled = {!this.props.selectedGroup || groups.length == 0}
+            <FloatingActionButton mini disabled = {!this.props.selectedGroup || groups.length === 0}
               className='student-add-button'
               onTouchTap={this.handleAddNewStudents.bind(this)}>
               {this.state.addNew && <ContentClear /> || <ContentAdd />}

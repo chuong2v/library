@@ -3,10 +3,10 @@ export default {
     title: 'Library',
   },
   menu: {
-    1: "Configuración",
-    2: "Grupos y alumnas/os",
-    3: "Calificaciones",
-    4: "Resultados"
+    configuration: "Configuración",
+    groupAndStudent: "Grupos y alumnas/os",
+    qualifications: "Calificaciones",
+    results: "Resultados"
   },
   group: {
     title: "Grupos"

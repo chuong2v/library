@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import * as GroupActions from '../actions/group';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
+/**
+ * Shared component is used for construct the textfield in the app along with the processing, validation and event handling.
+ */
 export default class TextFieldControlled extends Component {
 
   constructor(props) {

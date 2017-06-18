@@ -6,7 +6,6 @@ import styles from './styles'
 
 export default class GroupAndStudent extends Component {
   render() {
-    const { groups, students, actions } = this.props;
     return (
       <div style={styles.root}>
         <GridList

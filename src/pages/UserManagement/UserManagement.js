@@ -14,22 +14,22 @@ class UserManagement extends Component {
         contentContainerStyle={styles.tab}
         tabItemContainerStyle={styles.tabs}
       >
-        <Tab label={<Translate value='menu.1' />}
+        <Tab label={<Translate value='menu.configuration' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />
         </Tab>
-        <Tab label={<Translate value='menu.2' />}
+        <Tab label={<Translate value='menu.groupAndStudent' />}
           buttonStyle={styles.buttonStyle}
         >
           <GroupAndStudent groups={groups} students={students} actions={actions}/>
         </Tab>
-        <Tab label={<Translate value='menu.3' />}
+        <Tab label={<Translate value='menu.qualifications' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />
         </Tab>
-        <Tab label={<Translate value='menu.4' />}
+        <Tab label={<Translate value='menu.results' />}
           buttonStyle={styles.buttonStyle}
         >
           <div />

@@ -1,30 +1,37 @@
 import React, {Component} from 'react'
 import Paper from 'material-ui/Paper'
 import './style.css'
-import styles from './styles'
 import { Translate } from 'react-redux-i18n'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
 import GroupTable from './components/GroupTable'
 import * as GroupActions from '../../../../actions/group';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class GroupContainer extends Component {
-  constructor(props, context){
-    super(props, context);
-  }
 
+const styles = {
+  container: {
+    display: 'inline-block',
+    backgroundColor: '#f2f2f2'
+  }};
+class GroupContainer extends Component {
+
+  /**
+   * Init the fetching of the groups from the API.
+   * Set the first group in the list as selected group.
+   */
   componentDidMount() {
-    let self = this;
     this.props.actions.fetchGroupsFromApi().then(()=> {
       let selectedGroup = this.props.groups[0] && this.props.groups[0].idGroup;
       this.props.actions.setSelectedGroup(selectedGroup);
     })
   }
 
+/**
+ * Receive the event that the user clicks on the button Add_New group. Just simply pass it to an action and change state.
+ * @param {*} event 
+ */
   handleAddNewGroup(event){
     this.props.actions.setAddNewGroup(true);
   }

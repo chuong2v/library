@@ -1,25 +1,16 @@
-import types from './../actions/types'
-// import { combineReducers } from 'redux'
-// import createReducer from '../lib/createReducer'
+import types from './../actions/types';
 
-const initialState = {list: []}
+const initialState = {list: []};
 
 export function student(state = initialState, action) {
   switch (action.type) {
-    // case types.DELETE_STUDENT:
-    //   let newStudentsAfterDeleted = state.students.filter(student =>
-    //   student.id !== action.id
-    //   );
-    //   return Object.assign({}, state, { students: newStudentsAfterDeleted });
     case types.SEE_STUDENT:
       return Object.assign({}, state, { list: action.students });
-    // should belong to student reducer. refactor later
     case types.DELETE_STUDENT:
       let newStudentsAfterDeleted = state.list.filter(student =>
         student.idStudent !== action.payload
       );
       return Object.assign({}, state, { list: newStudentsAfterDeleted });
-
     case types.EDIT_STUDENT:
       let newStudentsAfterEdited = state.list.map(student =>
         student.id === action.id ?
@@ -38,11 +29,3 @@ export function student(state = initialState, action) {
       return state;
   }
 }
-
-// export const student = combineReducers({
-//   list: createReducer([], {
-//     [types.STUDENT_FETCH](state, action) {
-//       return action.payload || []
-//     },
-//   })
-// })

@@ -3,10 +3,10 @@ export default {
     title: 'Library',
   },
   menu: {
-    1: "Configuration",
-    2: "Groups and Students",
-    3: "Qualifications",
-    4: "Results"
+    configuration: "Configuration",
+    groupAndStudent: "Groups and Students",
+    qualifications: "Qualifications",
+    results: "Results"
   },
   group: {
     title: "Groups"

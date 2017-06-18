@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './../style.css'
-import styles from './../styles'
 import { Translate } from 'react-redux-i18n'
 import {
   Table,

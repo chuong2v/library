@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './../style.css'
-import styles from './../styles'
 import { Translate, Localize } from 'react-redux-i18n'
 import {
     Table,
@@ -12,13 +11,8 @@ import {
 } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import TextFieldControlled from './../../../../../components/TextFieldControlled';
-import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
-import * as GroupActions from '../../../../../actions/group';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 export default class GroupTable extends Component {
 
@@ -91,7 +85,7 @@ export default class GroupTable extends Component {
   }
 
   handleOnCancel(idGroup, text){
-    if(idGroup == -1){
+    if(idGroup === -1){
       this.props.setAddNewGroup(false);
     }
   }
@@ -130,7 +124,7 @@ export default class GroupTable extends Component {
                                  onSave={(text) => this.handleOnSave(row.idGroup, text)}
                                  onCancel={()=> this.handleOnCancel(row.idGroup)} />
           </TableRowColumn>
-          {row.idGroup != -1 && rowActions || null}
+          {row.idGroup !== -1 && rowActions || null}
         </TableRow>
     )
   }

@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import './../style.css'
-import styles from './../styles'
 import { Translate, Localize } from 'react-redux-i18n'
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 
-
+/**
+ * Take the responsibility of displaying the action buttons on the student row based on the editing flag.
+ */
 export default class StudentActionCell extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         if (this.props.editing) {
