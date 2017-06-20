@@ -9,10 +9,11 @@ cd library/
 npm install
 npm start
 ``` 
-## Unit Test
-npm test <br/>
 Then open http://localhost:3000/ to see your app.
 Please remember to start the backend server as well.
+
+## Unit Test
+npm test <br/>
 
 ## Understand the project
 The demo project includes the following tools and frameworks (most of them are already integrated by Create React App):
