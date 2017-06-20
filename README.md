@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 Then open http://localhost:3000/ to see your app.
-When you’re ready to deploy to production, create a minified bundle with npm run build.
+Please remember to start the backend server as well.
 
 ## Understand the project
 The demo project includes the following tools and frameworks (most of them are already integrated by Create React App):
