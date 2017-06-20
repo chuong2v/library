@@ -39,4 +39,4 @@ Some important folders: <br />
 7. **pages**: contains all the React components in the app.<br />
 All the files in the folder pages are grouped by the related features.<br />
 If you devide a webpage on the website into some smaller pieces and sort in a hierarchy, the files inside this folder would be presented and sorted in a same way.
-Building this structure by features, instead of by type, bring the big benefit when the project grow up (ex: easy to maintain, test and look up)<br />
+Building this structure by features, instead of by type, bring the big benefit when the project grows up (ex: easy to maintain, test and look up)<br />
