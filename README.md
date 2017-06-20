@@ -29,14 +29,14 @@ The flow would be like this:
 ## Structure
 ![alt text](https://github.com/chuong2v/library/blob/master/structure.png)
 
-Some important folders:
-1 . Action: define all the actions in our website. The action files are devided by the name of the view (group, student)
-2. api: describe how we communicate with the backend server.
-3. components: contains the React components that are reused at many place in our project.
-4. locale: support the interlocalization.
-5. reducers: contains the reducers to specify how states changes in the app.
-6. store: config the store in redux.
-7. pages: contains all the React components in the app.
-All the files in the folder pages are grouped by the related features.
+Some important folders: <br />
+1 . Action: define all the actions in our website. The action files are devided by the name of the view (group, student) <br />
+2. api: describe how we communicate with the backend server.<br />
+3. components: contains the React components that are reused at many place in our project.<br />
+4. locale: support the interlocalization.<br />
+5. reducers: contains the reducers to specify how states changes in the app.<br />
+6. store: config the store in redux.<br />
+7. pages: contains all the React components in the app.<br />
+All the files in the folder pages are grouped by the related features.<br />
 If you devide a webpage on the website into some smaller pieces and sort in a hierarchy, the files inside this folder would be presented and sorted in a same way.
-Building this structure by features, instead of by type, bring the big benefit when the project grow up (ex: easy to maintain, test and look up)
+Building this structure by features, instead of by type, bring the big benefit when the project grow up (ex: easy to maintain, test and look up)<br />
