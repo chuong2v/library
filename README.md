@@ -10,7 +10,7 @@ npm install
 npm start
 ``` 
 ## Unit Test
-npm test
+npm test <br/>
 Then open http://localhost:3000/ to see your app.
 Please remember to start the backend server as well.
 
